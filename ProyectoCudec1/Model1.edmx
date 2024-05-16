@@ -1,0 +1,702 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="INNOTECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="idCategoria" />
+          </Key>
+          <Property Name="idCategoria" Type="int" Nullable="false" />
+          <Property Name="Nombre_categoria" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Subcategoria_idSubcategoria" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Catologo">
+          <Key>
+            <PropertyRef Name="idcatalogo" />
+          </Key>
+          <Property Name="idcatalogo" Type="int" Nullable="false" />
+          <Property Name="Productos_idProductos" Type="int" Nullable="false" />
+          <Property Name="imagenes" Type="image" />
+          <Property Name="descripcion" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="Compra">
+          <Key>
+            <PropertyRef Name="idCompra" />
+          </Key>
+          <Property Name="idCompra" Type="int" Nullable="false" />
+          <Property Name="Fecha_de_Vencimiento" Type="date" />
+          <Property Name="Fecha_de_Compra" Type="date" />
+          <Property Name="Envio_idEnvio" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="idDepartamento" />
+          </Key>
+          <Property Name="idDepartamento" Type="int" Nullable="false" />
+          <Property Name="Nombre_departamento" Type="varchar" MaxLength="50" />
+          <Property Name="Categoria_idCategoria" Type="int" Nullable="false" />
+          <Property Name="id_categoria" Type="int" />
+        </EntityType>
+        <EntityType Name="Envio">
+          <Key>
+            <PropertyRef Name="idEnvio" />
+          </Key>
+          <Property Name="idEnvio" Type="int" Nullable="false" />
+          <Property Name="CodigoPostal" Type="int" />
+          <Property Name="Estado" Type="varchar" MaxLength="100" />
+          <Property Name="Calle" Type="varchar" MaxLength="100" />
+          <Property Name="Colonia" Type="varchar" MaxLength="100" />
+          <Property Name="Municipio" Type="varchar" MaxLength="100" />
+          <Property Name="Numero" Type="int" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="idProductos" />
+          </Key>
+          <Property Name="idProductos" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Descripcion_del_producto" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Precio" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Compra_idCompra" Type="int" Nullable="false" />
+          <Property Name="Imagen_del_producto" Type="image" />
+          <Property Name="Proveedor_idProveedor" Type="int" Nullable="false" />
+          <Property Name="Departamento_idDepartamento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="idProveedor" />
+          </Key>
+          <Property Name="idProveedor" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="Direccion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Subcategoria">
+          <Key>
+            <PropertyRef Name="idSubcategoria" />
+          </Key>
+          <Property Name="idSubcategoria" Type="int" Nullable="false" />
+          <Property Name="Nombre_de_subcategoria" Type="varchar" MaxLength="100" />
+          <Property Name="descripcion" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Tipo_de_usuario">
+          <Key>
+            <PropertyRef Name="idTipo_de_usuario" />
+          </Key>
+          <Property Name="idTipo_de_usuario" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Tipo_usuario" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="Tipo_de_usuario_idTipo_de_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" />
+          <Property Name="Apellido_paterno" Type="varchar" MaxLength="45" />
+          <Property Name="Apellido_materno" Type="varchar" MaxLength="45" />
+          <Property Name="Fecha_de_nacimiento" Type="date" />
+          <Property Name="Sexo" Type="varchar" MaxLength="45" />
+          <Property Name="User_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Correo" Type="varchar" MaxLength="50" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="Celular" Type="varchar" MaxLength="50" />
+          <Property Name="Foto_de_perfil" Type="image" />
+          <Property Name="Compra_idCompra" Type="int" Nullable="false" />
+          <Property Name="Tipo_de_usuario_idTipo_de_usuario" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_Categoria_Subcategoria1">
+          <End Role="Subcategoria" Type="Self.Subcategoria" Multiplicity="1" />
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subcategoria">
+              <PropertyRef Name="idSubcategoria" />
+            </Principal>
+            <Dependent Role="Categoria">
+              <PropertyRef Name="Subcategoria_idSubcategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Catologo_Productos1">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="Catologo" Type="Self.Catologo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="idProductos" />
+            </Principal>
+            <Dependent Role="Catologo">
+              <PropertyRef Name="Productos_idProductos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Compra_Envio1">
+          <End Role="Envio" Type="Self.Envio" Multiplicity="1" />
+          <End Role="Compra" Type="Self.Compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Envio">
+              <PropertyRef Name="idEnvio" />
+            </Principal>
+            <Dependent Role="Compra">
+              <PropertyRef Name="Envio_idEnvio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Departamento_Categoria1">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="idCategoria" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="Categoria_idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Productos_Compra1">
+          <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compra">
+              <PropertyRef Name="idCompra" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="Compra_idCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Productos_Departamento1">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="idDepartamento" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="Departamento_idDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Productos_Proveedor1">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="idProveedor" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="Proveedor_idProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_Compra1">
+          <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compra">
+              <PropertyRef Name="idCompra" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="Compra_idCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_Tipo_de_usuario1">
+          <End Role="Tipo_de_usuario" Type="Self.Tipo_de_usuario" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_de_usuario">
+              <PropertyRef Name="idTipo_de_usuario" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="Tipo_de_usuario_idTipo_de_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="INNOTECModelStoreContainer">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Catologo" EntityType="Self.Catologo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Compra" EntityType="Self.Compra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Envio" EntityType="Self.Envio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subcategoria" EntityType="Self.Subcategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_de_usuario" EntityType="Self.Tipo_de_usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_Categoria_Subcategoria1" Association="Self.fk_Categoria_Subcategoria1">
+            <End Role="Subcategoria" EntitySet="Subcategoria" />
+            <End Role="Categoria" EntitySet="Categoria" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Catologo_Productos1" Association="Self.fk_Catologo_Productos1">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Catologo" EntitySet="Catologo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Compra_Envio1" Association="Self.fk_Compra_Envio1">
+            <End Role="Envio" EntitySet="Envio" />
+            <End Role="Compra" EntitySet="Compra" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Departamento_Categoria1" Association="Self.fk_Departamento_Categoria1">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Departamento" EntitySet="Departamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Productos_Compra1" Association="Self.fk_Productos_Compra1">
+            <End Role="Compra" EntitySet="Compra" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Productos_Departamento1" Association="Self.fk_Productos_Departamento1">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Productos_Proveedor1" Association="Self.fk_Productos_Proveedor1">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_Compra1" Association="Self.fk_usuario_Compra1">
+            <End Role="Compra" EntitySet="Compra" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_Tipo_de_usuario1" Association="Self.fk_usuario_Tipo_de_usuario1">
+            <End Role="Tipo_de_usuario" EntitySet="Tipo_de_usuario" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="INNOTECModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="idCategoria" />
+          </Key>
+          <Property Name="idCategoria" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Subcategoria_idSubcategoria" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Subcategoria" Relationship="Self.fk_Categoria_Subcategoria1" FromRole="Categoria" ToRole="Subcategoria" />
+          <NavigationProperty Name="Departamentoes" Relationship="Self.fk_Departamento_Categoria1" FromRole="Categoria" ToRole="Departamento" />
+        </EntityType>
+        <EntityType Name="Catologo">
+          <Key>
+            <PropertyRef Name="idcatalogo" />
+          </Key>
+          <Property Name="idcatalogo" Type="Int32" Nullable="false" />
+          <Property Name="Productos_idProductos" Type="Int32" Nullable="false" />
+          <Property Name="imagenes" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Producto" Relationship="Self.fk_Catologo_Productos1" FromRole="Catologo" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Compra">
+          <Key>
+            <PropertyRef Name="idCompra" />
+          </Key>
+          <Property Name="idCompra" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_de_Vencimiento" Type="DateTime" Precision="0" />
+          <Property Name="Fecha_de_Compra" Type="DateTime" Precision="0" />
+          <Property Name="Envio_idEnvio" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Envio" Relationship="Self.fk_Compra_Envio1" FromRole="Compra" ToRole="Envio" />
+          <NavigationProperty Name="Productos" Relationship="Self.fk_Productos_Compra1" FromRole="Compra" ToRole="Productos" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_usuario_Compra1" FromRole="Compra" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="idDepartamento" />
+          </Key>
+          <Property Name="idDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Categoria_idCategoria" Type="Int32" Nullable="false" />
+          <Property Name="id_categoria" Type="Int32" />
+          <NavigationProperty Name="Categoria" Relationship="Self.fk_Departamento_Categoria1" FromRole="Departamento" ToRole="Categoria" />
+          <NavigationProperty Name="Productos" Relationship="Self.fk_Productos_Departamento1" FromRole="Departamento" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Envio">
+          <Key>
+            <PropertyRef Name="idEnvio" />
+          </Key>
+          <Property Name="idEnvio" Type="Int32" Nullable="false" />
+          <Property Name="CodigoPostal" Type="Int32" />
+          <Property Name="Estado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Calle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Colonia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Municipio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Numero" Type="Int32" />
+          <NavigationProperty Name="Compras" Relationship="Self.fk_Compra_Envio1" FromRole="Envio" ToRole="Compra" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="idProductos" />
+          </Key>
+          <Property Name="idProductos" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion_del_producto" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Precio" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Compra_idCompra" Type="Int32" Nullable="false" />
+          <Property Name="Imagen_del_producto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Proveedor_idProveedor" Type="Int32" Nullable="false" />
+          <Property Name="Departamento_idDepartamento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Catologoes" Relationship="Self.fk_Catologo_Productos1" FromRole="Productos" ToRole="Catologo" />
+          <NavigationProperty Name="Compra" Relationship="Self.fk_Productos_Compra1" FromRole="Productos" ToRole="Compra" />
+          <NavigationProperty Name="Departamento" Relationship="Self.fk_Productos_Departamento1" FromRole="Productos" ToRole="Departamento" />
+          <NavigationProperty Name="Proveedor" Relationship="Self.fk_Productos_Proveedor1" FromRole="Productos" ToRole="Proveedor" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="idProveedor" />
+          </Key>
+          <Property Name="idProveedor" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Productos" Relationship="Self.fk_Productos_Proveedor1" FromRole="Proveedor" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Subcategoria">
+          <Key>
+            <PropertyRef Name="idSubcategoria" />
+          </Key>
+          <Property Name="idSubcategoria" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_de_subcategoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Categorias" Relationship="Self.fk_Categoria_Subcategoria1" FromRole="Subcategoria" ToRole="Categoria" />
+        </EntityType>
+        <EntityType Name="Tipo_de_usuario">
+          <Key>
+            <PropertyRef Name="idTipo_de_usuario" />
+          </Key>
+          <Property Name="idTipo_de_usuario" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_usuario_Tipo_de_usuario1" FromRole="Tipo_de_usuario" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="Tipo_de_usuario_idTipo_de_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido_paterno" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido_materno" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_de_nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="Sexo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Foto_de_perfil" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Compra_idCompra" Type="Int32" Nullable="false" />
+          <Property Name="Tipo_de_usuario_idTipo_de_usuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Compra" Relationship="Self.fk_usuario_Compra1" FromRole="usuario" ToRole="Compra" />
+          <NavigationProperty Name="Tipo_de_usuario" Relationship="Self.fk_usuario_Tipo_de_usuario1" FromRole="usuario" ToRole="Tipo_de_usuario" />
+        </EntityType>
+        <Association Name="fk_Categoria_Subcategoria1">
+          <End Role="Subcategoria" Type="Self.Subcategoria" Multiplicity="1" />
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subcategoria">
+              <PropertyRef Name="idSubcategoria" />
+            </Principal>
+            <Dependent Role="Categoria">
+              <PropertyRef Name="Subcategoria_idSubcategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Departamento_Categoria1">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="idCategoria" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="Categoria_idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Catologo_Productos1">
+          <End Role="Productos" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Catologo" Type="Self.Catologo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="idProductos" />
+            </Principal>
+            <Dependent Role="Catologo">
+              <PropertyRef Name="Productos_idProductos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Compra_Envio1">
+          <End Role="Envio" Type="Self.Envio" Multiplicity="1" />
+          <End Role="Compra" Type="Self.Compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Envio">
+              <PropertyRef Name="idEnvio" />
+            </Principal>
+            <Dependent Role="Compra">
+              <PropertyRef Name="Envio_idEnvio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Productos_Compra1">
+          <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
+          <End Role="Productos" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compra">
+              <PropertyRef Name="idCompra" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="Compra_idCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_Compra1">
+          <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compra">
+              <PropertyRef Name="idCompra" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="Compra_idCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Productos_Departamento1">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
+          <End Role="Productos" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="idDepartamento" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="Departamento_idDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Productos_Proveedor1">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="Productos" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="idProveedor" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="Proveedor_idProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_Tipo_de_usuario1">
+          <End Role="Tipo_de_usuario" Type="Self.Tipo_de_usuario" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_de_usuario">
+              <PropertyRef Name="idTipo_de_usuario" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="Tipo_de_usuario_idTipo_de_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="INNOTECEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categorias" EntityType="Self.Categoria" />
+          <EntitySet Name="Catologoes" EntityType="Self.Catologo" />
+          <EntitySet Name="Compras" EntityType="Self.Compra" />
+          <EntitySet Name="Departamentoes" EntityType="Self.Departamento" />
+          <EntitySet Name="Envios" EntityType="Self.Envio" />
+          <EntitySet Name="Productos" EntityType="Self.Producto" />
+          <EntitySet Name="Proveedors" EntityType="Self.Proveedor" />
+          <EntitySet Name="Subcategorias" EntityType="Self.Subcategoria" />
+          <EntitySet Name="Tipo_de_usuario" EntityType="Self.Tipo_de_usuario" />
+          <EntitySet Name="usuarios" EntityType="Self.usuario" />
+          <AssociationSet Name="fk_Categoria_Subcategoria1" Association="Self.fk_Categoria_Subcategoria1">
+            <End Role="Subcategoria" EntitySet="Subcategorias" />
+            <End Role="Categoria" EntitySet="Categorias" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Departamento_Categoria1" Association="Self.fk_Departamento_Categoria1">
+            <End Role="Categoria" EntitySet="Categorias" />
+            <End Role="Departamento" EntitySet="Departamentoes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Catologo_Productos1" Association="Self.fk_Catologo_Productos1">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Catologo" EntitySet="Catologoes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Compra_Envio1" Association="Self.fk_Compra_Envio1">
+            <End Role="Envio" EntitySet="Envios" />
+            <End Role="Compra" EntitySet="Compras" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Productos_Compra1" Association="Self.fk_Productos_Compra1">
+            <End Role="Compra" EntitySet="Compras" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_Compra1" Association="Self.fk_usuario_Compra1">
+            <End Role="Compra" EntitySet="Compras" />
+            <End Role="usuario" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Productos_Departamento1" Association="Self.fk_Productos_Departamento1">
+            <End Role="Departamento" EntitySet="Departamentoes" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Productos_Proveedor1" Association="Self.fk_Productos_Proveedor1">
+            <End Role="Proveedor" EntitySet="Proveedors" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_Tipo_de_usuario1" Association="Self.fk_usuario_Tipo_de_usuario1">
+            <End Role="Tipo_de_usuario" EntitySet="Tipo_de_usuario" />
+            <End Role="usuario" EntitySet="usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="INNOTECModelStoreContainer" CdmEntityContainer="INNOTECEntities">
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="INNOTECModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="Nombre_categoria" ColumnName="Nombre_categoria" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Subcategoria_idSubcategoria" ColumnName="Subcategoria_idSubcategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Catologoes">
+            <EntityTypeMapping TypeName="INNOTECModel.Catologo">
+              <MappingFragment StoreEntitySet="Catologo">
+                <ScalarProperty Name="idcatalogo" ColumnName="idcatalogo" />
+                <ScalarProperty Name="Productos_idProductos" ColumnName="Productos_idProductos" />
+                <ScalarProperty Name="imagenes" ColumnName="imagenes" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Compras">
+            <EntityTypeMapping TypeName="INNOTECModel.Compra">
+              <MappingFragment StoreEntitySet="Compra">
+                <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+                <ScalarProperty Name="Fecha_de_Vencimiento" ColumnName="Fecha_de_Vencimiento" />
+                <ScalarProperty Name="Fecha_de_Compra" ColumnName="Fecha_de_Compra" />
+                <ScalarProperty Name="Envio_idEnvio" ColumnName="Envio_idEnvio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamentoes">
+            <EntityTypeMapping TypeName="INNOTECModel.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
+                <ScalarProperty Name="Nombre_departamento" ColumnName="Nombre_departamento" />
+                <ScalarProperty Name="Categoria_idCategoria" ColumnName="Categoria_idCategoria" />
+                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Envios">
+            <EntityTypeMapping TypeName="INNOTECModel.Envio">
+              <MappingFragment StoreEntitySet="Envio">
+                <ScalarProperty Name="idEnvio" ColumnName="idEnvio" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="INNOTECModel.Producto">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="idProductos" ColumnName="idProductos" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion_del_producto" ColumnName="Descripcion_del_producto" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Compra_idCompra" ColumnName="Compra_idCompra" />
+                <ScalarProperty Name="Imagen_del_producto" ColumnName="Imagen_del_producto" />
+                <ScalarProperty Name="Proveedor_idProveedor" ColumnName="Proveedor_idProveedor" />
+                <ScalarProperty Name="Departamento_idDepartamento" ColumnName="Departamento_idDepartamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedors">
+            <EntityTypeMapping TypeName="INNOTECModel.Proveedor">
+              <MappingFragment StoreEntitySet="Proveedor">
+                <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subcategorias">
+            <EntityTypeMapping TypeName="INNOTECModel.Subcategoria">
+              <MappingFragment StoreEntitySet="Subcategoria">
+                <ScalarProperty Name="idSubcategoria" ColumnName="idSubcategoria" />
+                <ScalarProperty Name="Nombre_de_subcategoria" ColumnName="Nombre_de_subcategoria" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_de_usuario">
+            <EntityTypeMapping TypeName="INNOTECModel.Tipo_de_usuario">
+              <MappingFragment StoreEntitySet="Tipo_de_usuario">
+                <ScalarProperty Name="idTipo_de_usuario" ColumnName="idTipo_de_usuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Tipo_usuario" ColumnName="Tipo_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="INNOTECModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido_paterno" ColumnName="Apellido_paterno" />
+                <ScalarProperty Name="Apellido_materno" ColumnName="Apellido_materno" />
+                <ScalarProperty Name="Fecha_de_nacimiento" ColumnName="Fecha_de_nacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Foto_de_perfil" ColumnName="Foto_de_perfil" />
+                <ScalarProperty Name="Compra_idCompra" ColumnName="Compra_idCompra" />
+                <ScalarProperty Name="Tipo_de_usuario_idTipo_de_usuario" ColumnName="Tipo_de_usuario_idTipo_de_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
