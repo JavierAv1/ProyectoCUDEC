@@ -21,6 +21,8 @@
                 <asp:TextBox class="input" type="password" id="txtPassword" placeholder="Contraseña" runat="server"></asp:TextBox> 
                 <br>
                 <asp:Button class="btn" ID="button1" OnClick="button1_Click" runat="server"  Text="Iniciar Sesión" />
+         <asp:Label ID="Label1" runat="server" Text="" />
+
             </form>
         </div>
         <img class="image-container" src="/images/logo.svg" alt="" />

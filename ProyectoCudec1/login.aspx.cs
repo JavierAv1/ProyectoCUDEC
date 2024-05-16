@@ -29,7 +29,7 @@ namespace Proyecto
             using (var context = new INNOTECEntities())
             {
                 // Intenta encontrar un usuario que coincida con el correo proporcionado
-                var usuario = context.usuarios.FirstOrDefault(u => u.Correo == vcorreo);
+                var usuario = context.usuarios.FirstOrDefault(u => u.User_Name == vcorreo);
 
                 if (usuario != null)
                 {
@@ -37,18 +37,18 @@ namespace Proyecto
                     if (usuario.Contraseña == vcontraseña)
                     {
                         // La contraseña coincide, aquí puedes continuar con lo que necesites hacer
-
+                        Response.Redirect("index.aspx");
                     }
                     else
                     {
                         // La contraseña no coincide
-                        Console.WriteLine("Contraseña incorrecta");
+                        Label1.Text = ("Contraseña incorrecta");
                     }
                 }
                 else
                 {
                     // No se encontró ningún usuario con el correo proporcionado
-                    Console.WriteLine("Usuario no encontrado");
+                    Label1.Text=("Usuario no encontrado");
                 }
             }
         }
