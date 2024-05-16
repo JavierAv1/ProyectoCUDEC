@@ -1,17 +1,13 @@
-﻿using ProyectoCudec1;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Services.Description;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Windows;
 
-
-namespace Proyecto
+namespace ProyectoCudec1
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class WebForm3 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -48,12 +44,9 @@ namespace Proyecto
                 else
                 {
                     // No se encontró ningún usuario con el correo proporcionado
-                    Label1.Text=("Usuario no encontrado");
+                    Label1.Text = ("Usuario no encontrado");
                 }
             }
         }
-
     }
-
-
 }

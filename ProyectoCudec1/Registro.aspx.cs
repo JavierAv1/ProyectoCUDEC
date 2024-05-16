@@ -39,6 +39,7 @@ namespace ProyectoCudec1
                     bd.usuarios.Add(bdS);
                     bd.SaveChanges();
                     Label1.Text = "Registro Exitoso";
+                    Response.Redirect("logn.aspx");
                 }
                 catch (Exception Ex)
                 {

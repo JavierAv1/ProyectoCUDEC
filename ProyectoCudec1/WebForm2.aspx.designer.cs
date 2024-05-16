@@ -11,7 +11,7 @@ namespace ProyectoCudec1
 {
 
 
-    public partial class WebForm4
+    public partial class WebForm2
     {
 
         /// <summary>
