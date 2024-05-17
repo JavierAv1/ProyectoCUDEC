@@ -7,8 +7,17 @@ using System.Web.UI.WebControls;
 
 namespace ProyectoCudec1
 {
+  
     public partial class WebForm3 : System.Web.UI.Page
     {
+        public static int _TipoRolUsuario = 0;
+
+        public static int RolUsuario
+        {
+            get { return _TipoRolUsuario; }
+            set { _TipoRolUsuario = value; }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -33,8 +42,10 @@ namespace ProyectoCudec1
                         // Si se encuentra un usuario con el correo proporcionado, verifica si la contraseña coincide
                         if (usuario.Contraseña == vcontraseña)
                         {
-                            // La contraseña coincide, aquí puedes continuar con lo que necesites hacer
-                            Response.Redirect("index.aspx");
+                            RolUsuario = usuario.Tipo_de_usuario_idTipo_de_usuario;
+
+                                Response.Redirect("index.aspx");
+
                         }
                         else
                         {
