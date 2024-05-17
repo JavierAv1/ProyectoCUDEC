@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="ccs2.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title></title>
@@ -82,7 +82,48 @@
         </nav>
       </div>
       <br>
-      
+      <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Descripción</th>
+                <th>Provedoor</th>
+                <th>Departamento</th>
+                <th>Proveedor</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var producto in Model)
+            {
+                <tr>
+                    <td>@producto.Nombre</td>
+                    <td>@producto.Precio</td>
+                    <td>
+                        <form asp-action="Eliminar" asp-route-id="@producto.Id" method="post">
+                            <button type="submit">Eliminar</button>
+                        </form>
+                        <form asp-action="Modificar" asp-route-id="@producto.Id" method="post">
+                            <button type="submit">Modificar</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h2>Agregar Nuevo Producto</h2>
+    <form asp-action="Agregar" method="post">
+        <label>Nombre:</label>
+        <input type="text" name="Nombre" />
+        <br />
+        <label>Precio:</label>
+        <input type="text" name="Precio" />
+        <br />
+        <button type="submit">Agregar</button>
+    </form>
+
           </form>
       </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
