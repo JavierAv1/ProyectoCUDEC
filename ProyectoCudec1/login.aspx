@@ -22,12 +22,17 @@
                 <br>
                 <asp:Button class="btn" ID="button1" OnClick="button1_Click" runat="server"  Text="Iniciar Sesión" />
          <asp:Label ID="Label1" runat="server" Text="" />
-                <asp:Label ID="Label2" runat="server"  Text="Registrarse"/>
+                <asp:Label ID="Label2" runat="server" OnClick="redireccionar()" Text="Registrarse"/>
             </form>
         </div>
         <img class="image-container" src="/images/logo.svg" alt="" />
     </div>
         
-    
+    <script>
+    function redireccionar() {
+        // Redireccionar a la página deseada
+        window.location.href = "Registro.aspx";
+    }
+    </script>
 </body>
 </html>

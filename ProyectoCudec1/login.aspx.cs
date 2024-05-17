@@ -21,32 +21,40 @@ namespace ProyectoCudec1
         {
             string vcorreo = txtuser.Text;
             string vcontraseña = txtPassword.Text; // Asegúrate de obtener la contraseña del campo de texto correspondiente
-
-            using (var context = new INNOTECEntities())
+            try
             {
-                // Intenta encontrar un usuario que coincida con el correo proporcionado
-                var usuario = context.usuarios.FirstOrDefault(u => u.User_Name == vcorreo);
-
-                if (usuario != null)
+                using (var context = new INNOTECEntities())
                 {
-                    // Si se encuentra un usuario con el correo proporcionado, verifica si la contraseña coincide
-                    if (usuario.Contraseña == vcontraseña)
+                    // Intenta encontrar un usuario que coincida con el correo proporcionado
+                    var usuario = context.usuarios.FirstOrDefault(u => u.User_Name == vcorreo);
+
+                    if (usuario != null)
                     {
-                        // La contraseña coincide, aquí puedes continuar con lo que necesites hacer
-                        Response.Redirect("index.aspx");
+                        // Si se encuentra un usuario con el correo proporcionado, verifica si la contraseña coincide
+                        if (usuario.Contraseña == vcontraseña)
+                        {
+                            // La contraseña coincide, aquí puedes continuar con lo que necesites hacer
+                            Response.Redirect("index.aspx");
+                        }
+                        else
+                        {
+                            // La contraseña no coincide
+                            Label1.Text = ("Contraseña incorrecta");
+                        }
                     }
                     else
                     {
-                        // La contraseña no coincide
-                        Label1.Text = ("Contraseña incorrecta");
+                        // No se encontró ningún usuario con el correo proporcionado
+                        Label1.Text = ("Usuario no encontrado");
                     }
                 }
-                else
-                {
-                    // No se encontró ningún usuario con el correo proporcionado
-                    Label1.Text = ("Usuario no encontrado");
-                }
             }
+            catch (Exception Ex)
+            {
+
+                Label1.Text = Ex.Message;
+            }
+            
         }
     }
 }
