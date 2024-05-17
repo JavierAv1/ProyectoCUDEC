@@ -22,7 +22,7 @@
                 <br>
                 <asp:Button class="btn" ID="button1" OnClick="button1_Click" runat="server"  Text="Iniciar Sesión" />
          <asp:Label ID="Label1" runat="server" Text="" />
-
+                <asp:Label ID="Label2" runat="server"  Text="Registrarse"/>
             </form>
         </div>
         <img class="image-container" src="/images/logo.svg" alt="" />
