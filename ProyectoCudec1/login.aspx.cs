@@ -20,7 +20,14 @@ namespace ProyectoCudec1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (_TipoRolUsuario == 0) 
+            {
+                
+            }
+            else
+            {
+                Response.Redirect("index.aspx");
+            }
         }
         protected void button1_Click(object sender, EventArgs e)
         {
