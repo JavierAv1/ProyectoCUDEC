@@ -75,6 +75,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="frmAdministrador.aspx" />
+    <Content Include="frmProducto.aspx" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
@@ -110,6 +112,20 @@
     </Compile>
     <Compile Include="Envio.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdministrador.aspx.cs">
+      <DependentUpon>frmAdministrador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmAdministrador.aspx.designer.cs">
+      <DependentUpon>frmAdministrador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmProducto.aspx.cs">
+      <DependentUpon>frmProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmProducto.aspx.designer.cs">
+      <DependentUpon>frmProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
