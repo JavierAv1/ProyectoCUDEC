@@ -98,107 +98,33 @@
             </nav>
         </div>
         <!-- Aquí va el contenido principal de la página -->
-        <div class="container" style="background-image: url('src/Background3.jpeg');background-repeat: no-repeat;background-position: center; background-size: cover;">
-            <div class="container text-center">
-                <div class="row align-items-center">
-                    <div class="col m-4">
-                        <div id="carouselExampleInterval2" class="carousel slide" data-bs-ride="carousel" style="width: 60%; height: 60%; margin: auto;">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active" data-bs-interval="10000">
-                                    <img src="src/Diesel.jpg" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item" data-bs-interval="2000">
-                                    <img src="src/Anticongelante.jpg" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="src/Aceite.jpg" class="d-block w-100" alt="...">
-                                </div>
+        <div class="container">
+            <h2>Productos</h2>
+            <asp:Repeater ID="ProductosRepeater" runat="server">
+                <ItemTemplate>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src='<%# Eval("ImagenUrl") %>' class="card-img-top" alt='<%# Eval("Nombre") %>'>
+                            <div class="card-body">
+                                <h5 class="card-title"><%# Eval("Nombre") %></h5>
+                                <p class="card-text"><%# Eval("Descripcion") %></p>
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval2" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval2" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
                         </div>
                     </div>
-                    <div class="col m-4">
-                        <div id="carouselExampleInterval1" class="carousel slide" data-bs-ride="carousel" style="width: 60%; height: 60%; margin: auto;">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active" data-bs-interval="10000">
-                                    <img src="src/Diesel.jpg" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item" data-bs-interval="2000">
-                                    <img src="src/Anticongelante.jpg" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="src/Aceite.jpg" class="d-block w-100" alt="...">
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval1" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval1" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container" style="background-image: url('src/Background3.jpeg');background-repeat: no-repeat;background-position: center; background-size: cover;">
-            <div class="container text-center">
-                <div class="row align-items-center">
-                    <div class="col m-4">
-                        <div id="carouselExampleInterval4" class="carousel slide" data-bs-ride="carousel" style="width: 60%; height: 60%; margin: auto;">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active" data-bs-interval="10000">
-                                    <img src="src/Diesel.jpg" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item" data-bs-interval="2000">
-                                    <img src="Images/Anticongelante.jpg" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="src/Aceite.jpg" class="d-block w-100" alt="...">
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval4" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval4" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col m-4">
-                        <div id="carouselExampleInterval5" class="carousel slide" data-bs-ride="carousel" style="width: 60%; height: 60%; margin: auto;">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active" data-bs-interval="10000">
-                                    <img src="src/Diesel.jpg" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item" data-bs-interval="2000">
-                                    <img src="src/Anticongelante.jpg" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="src/Aceite.jpg" class="d-block w-100" alt="...">
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval5" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval5" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </div>
+                </ItemTemplate>
+                <SeparatorTemplate>
+                    <div class="w-100"></div>
+                </SeparatorTemplate>
+            </asp:Repeater>
+            <div class="row">
+                <div class="col-md-12">
+                    <nav aria-label="Page navigation">
+                        <asp:Repeater ID="PagedListPager" runat="server">
+                            <ItemTemplate>
+                                <%# Container.DataItem %>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -253,3 +179,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>
 </html>
+
