@@ -69,21 +69,21 @@ namespace ProyectoCudec1
         protected global::System.Web.UI.WebControls.Repeater ProductosRepeater;
 
         /// <summary>
-        /// Control btnPrevious.
+        /// Control Button1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPrevious;
+        protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
-        /// Control btnNext.
+        /// Control Button2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNext;
+        protected global::System.Web.UI.WebControls.Button Button2;
     }
 }

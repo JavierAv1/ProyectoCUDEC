@@ -116,9 +116,9 @@
                                 <h5 class="card-title"><%# Eval("Nombre") %></h5>
                                 <p class="card-text"><%# Eval("DescripcionDelProducto") %></p>
                                 <!-- Botón para añadir al carrito -->
-                                <asp:Button ID="btnAddToCart" runat="server" Text="Añadir al Carrito" 
-                                            CommandName="AddToCart" CommandArgument='<%# Eval("idProductos") %>' 
-                                            CssClass="btn btn-primary" />
+                              <asp:Button ID="btnAddToCart" runat="server" OnClick="btnAddToCart_Click" Text="Añadir al Carrito" CommandName="AddToCart" CommandArgument='<%# Eval("idProductos") %>' CssClass="btn btn-primary"  />
+
+
                             </div>
                         </div>
                     </div>
@@ -131,8 +131,8 @@
             <!-- Paginación -->
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <asp:Button ID="btnPrevious" runat="server" Text="Anterior" OnClick="btnPrevious_Click" CssClass="btn btn-secondary" />
-                    <asp:Button ID="btnNext" runat="server" Text="Siguiente" OnClick="btnNext_Click" CssClass="btn btn-secondary" />
+                     <asp:Button ID="Button1" runat="server" Text="Siguiente" CssClass="btn btn-secondary btn-custom" OnClick="btnNext_Click" />
+                    <asp:Button ID="Button2" runat="server" Text="Anterior" CssClass="btn btn-secondary btn-custom" OnClick="btnPrevious_Click" />
                 </div>
             </div>
         </div>

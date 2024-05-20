@@ -58,8 +58,8 @@ namespace ProyectoCudec1
             ProductosRepeater.DataSource = productos;
             ProductosRepeater.DataBind();
 
-            btnPrevious.Enabled = productos.HasPreviousPage;
-            btnNext.Enabled = productos.HasNextPage;
+            Button2.Enabled = productos.HasPreviousPage;
+            Button1.Enabled = productos.HasNextPage;
         }
         protected void btnPrevious_Click(object sender, EventArgs e)
         {
@@ -89,23 +89,49 @@ namespace ProyectoCudec1
                 Response.Redirect("~/Login.aspx");
             }
         }
-        protected void ProductosRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        protected void btnAddToCart_Click(object sender, EventArgs e)
         {
-            if (e.CommandName == "AddToCart")
-            {
-                // Obtener el ID del producto desde el CommandArgument
-                int productoID = Convert.ToInt32(e.CommandArgument);
+            // Obtener el ID del producto desde el argumento del comando
+            int productoID = Convert.ToInt32((sender as Button).CommandArgument);
 
-                // Aquí deberías añadir el producto al carrito
-                // Ejemplo: AddProductToCart(productoID);
-
-                // Mostrar un mensaje de confirmación (opcional)
-                Response.Write("<script>alert('Producto añadido al carrito!');</script>");
-            }
+            // Llamar al método para agregar el producto al carrito
+            AddProductToCart(productoID);
         }
+
+
         protected void AddProductToCart(int productoID)
         {
-            // Implementa la lógica para añadir el producto al carrito
+            int UserId = WebForm3.UserId;
+            // Obtener el ID del usuario actualmente autenticado (aquí asumo que tienes un sistema de autenticación implementado)
+            int userID =  UserId; // Debes implementar esta función para obtener el ID del usuario actual
+
+            // Calcular la fecha actual
+            DateTime fechaDeCompra = DateTime.Now;
+
+            // Calcular la fecha de vencimiento (15 días después de la fecha de compra)
+            DateTime fechaDeVencimiento = fechaDeCompra.AddDays(15);
+
+            // Insertar la información de la compra en la base de datos
+            using (var context = new INNOTECEntities())
+            {
+                Compra nuevaCompra = new Compra
+                {
+                    idusuario = userID,
+                    idproducto = productoID,
+                    Cantidad = 1,
+                    FechaDeCompra = fechaDeCompra,
+                    FechaVencimiento = fechaDeVencimiento
+                };
+
+                // Agregar la nueva compra a la tabla Compra
+                context.Compra.Add(nuevaCompra);
+
+                // Guardar los cambios en la base de datos
+                context.SaveChanges();
+            }
+
+            // Mostrar un mensaje de confirmación
+            Response.Write("<script>alert('Producto añadido al carrito y comprado exitosamente!');</script>");
         }
 
     }
