@@ -106,40 +106,36 @@
         </div>
         <!-- Aquí va el contenido principal de la página -->
         <div class="container">
-    <h2>Productos</h2>
-    <asp:Repeater ID="ProductosRepeater" runat="server">
-        <ItemTemplate>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img src='<%# "data:image/jpeg;base64," + Convert.ToBase64String((byte[])Eval("ImagenDelProducto")) %>' class="card-img-top" alt='<%# Eval("Nombre") %>'>
-                    <div class="card-body">
-                        <h5 class="card-title"><%# Eval("Nombre") %></h5>
-                        <p class="card-text"><%# Eval("DescripcionDelProducto") %></p>
-                        <!-- Botón para añadir al carrito -->
-                        <asp:Button ID="btnAddToCart" runat="server" Text="Añadir al Carrito" 
-                                    CommandName="AddToCart" CommandArgument='<%# Eval("idProductos") %>' 
-                                    CssClass="btn btn-primary" />
+            <h2>Productos</h2>
+            <asp:Repeater ID="ProductosRepeater" runat="server">
+                <ItemTemplate>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src='<%# "data:image/jpeg;base64," + Convert.ToBase64String((byte[])Eval("ImagenDelProducto")) %>' class="card-img-top" alt='<%# Eval("Nombre") %>'>
+                            <div class="card-body">
+                                <h5 class="card-title"><%# Eval("Nombre") %></h5>
+                                <p class="card-text"><%# Eval("DescripcionDelProducto") %></p>
+                                <!-- Botón para añadir al carrito -->
+                                <asp:Button ID="btnAddToCart" runat="server" Text="Añadir al Carrito" 
+                                            CommandName="AddToCart" CommandArgument='<%# Eval("idProductos") %>' 
+                                            CssClass="btn btn-primary" />
+                            </div>
+                        </div>
                     </div>
+                </ItemTemplate>
+                <SeparatorTemplate>
+                    <div class="w-100"></div>
+                </SeparatorTemplate>
+            </asp:Repeater>
+
+            <!-- Paginación -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <asp:Button ID="btnPrevious" runat="server" Text="Anterior" OnClick="btnPrevious_Click" CssClass="btn btn-secondary" />
+                    <asp:Button ID="btnNext" runat="server" Text="Siguiente" OnClick="btnNext_Click" CssClass="btn btn-secondary" />
                 </div>
             </div>
-        </ItemTemplate>
-        <SeparatorTemplate>
-            <div class="w-100"></div>
-        </SeparatorTemplate>
-    </asp:Repeater>
-
-    <div class="row">
-        <div class="col-md-12">
-            <nav aria-label="Page navigation">
-                <asp:Repeater ID="PagedListPager" runat="server">
-                    <ItemTemplate>
-                        <%# Container.DataItem %>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </nav>
         </div>
-    </div>
-</div>
 
 
         <br>

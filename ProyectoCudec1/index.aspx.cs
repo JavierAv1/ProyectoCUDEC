@@ -9,11 +9,13 @@ namespace ProyectoCudec1
     public partial class WebForm4 : System.Web.UI.Page
     {
         private INNOTECEntities _context = new INNOTECEntities();
-
+        private int PageSize = 2;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                ViewState["PageNumber"] = 1;
+
                 ConfigureButtonsBasedOnUserRole();
                 LoadPagedData();
             }
@@ -48,24 +50,33 @@ namespace ProyectoCudec1
 
         private void LoadPagedData()
         {
-            int pageNumber = 1;
-            if (Request.QueryString["page"] != null)
-            {
-                int.TryParse(Request.QueryString["page"], out pageNumber);
-            }
-
-            int pageSize = 10;
+            int pageNumber = (int)ViewState["PageNumber"];
             var productos = _context.Productos
-                                    .OrderBy(p => p.Nombre) // Asegúrate de ordenar los datos
-                                    .ToPagedList(pageNumber, pageSize);
+                                    .OrderBy(p => p.Nombre)
+                                    .ToPagedList(pageNumber, PageSize);
 
             ProductosRepeater.DataSource = productos;
             ProductosRepeater.DataBind();
 
-            PagedListPager.DataSource = productos;
-            PagedListPager.DataBind();
+            btnPrevious.Enabled = productos.HasPreviousPage;
+            btnNext.Enabled = productos.HasNextPage;
+        }
+        protected void btnPrevious_Click(object sender, EventArgs e)
+        {
+            int pageNumber = (int)ViewState["PageNumber"];
+            if (pageNumber > 1)
+            {
+                ViewState["PageNumber"] = pageNumber - 1;
+                LoadPagedData();
+            }
         }
 
+        protected void btnNext_Click(object sender, EventArgs e)
+        {
+            int pageNumber = (int)ViewState["PageNumber"];
+            ViewState["PageNumber"] = pageNumber + 1;
+            LoadPagedData();
+        }
         protected void btnCarritoCompras_Click(object sender, EventArgs e)
         {
             int userId = WebForm3._TipoRolUsuario;
