@@ -12,28 +12,18 @@ namespace ProyectoCudec1
     using System;
     using System.Collections.Generic;
     
-    public partial class Producto
+    public partial class TipoUsuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Producto()
+        public TipoUsuario()
         {
-            this.Catologoes = new HashSet<Catologo>();
+            this.usuario = new HashSet<usuario>();
         }
     
-        public int idProductos { get; set; }
-        public string Nombre { get; set; }
-        public string Descripcion_del_producto { get; set; }
-        public int Precio { get; set; }
-        public Nullable<int> Cantidad { get; set; }
-        public int Compra_idCompra { get; set; }
-        public byte[] Imagen_del_producto { get; set; }
-        public int Proveedor_idProveedor { get; set; }
-        public int Departamento_idDepartamento { get; set; }
+        public int idTipousuario { get; set; }
+        public string TipoUsuario1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Catologo> Catologoes { get; set; }
-        public virtual Compra Compra { get; set; }
-        public virtual Departamento Departamento { get; set; }
-        public virtual Proveedor Proveedor { get; set; }
+        public virtual ICollection<usuario> usuario { get; set; }
     }
 }

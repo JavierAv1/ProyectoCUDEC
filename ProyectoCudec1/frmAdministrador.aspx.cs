@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace ProyectoCudec1
 {
@@ -20,38 +21,38 @@ namespace ProyectoCudec1
 
         private void BindData()
         {
-            gvDepartamento.DataSource = context.Departamentoes.ToList();
+            gvDepartamento.DataSource = context.Departamento.ToList();
             gvDepartamento.DataBind();
 
-            gvCatalogo.DataSource = context.Catologoes.ToList();
-            gvCatalogo.DataBind();
-
-            gvProveedor.DataSource = context.Proveedors.ToList();
+            gvProveedor.DataSource = context.Proveedor.ToList();
             gvProveedor.DataBind();
 
-            gvCategoria.DataSource = context.Categorias.ToList();
+            gvCategoria.DataSource = context.Categoria.ToList();
             gvCategoria.DataBind();
 
-            gvSubcategoria.DataSource = context.Subcategorias.ToList();
+            gvSubcategoria.DataSource = context.Subcategoria.ToList();
             gvSubcategoria.DataBind();
+
+            gvUsuario.DataSource = context.usuario.ToList();
+            gvUsuario.DataBind();
         }
 
         private void LoadDropdowns()
         {
-            ddlCategoriaDepartamento.DataSource = context.Categorias.ToList();
-            ddlCategoriaDepartamento.DataTextField = "Nombre_categoria";
+            ddlCategoriaDepartamento.DataSource = context.Categoria.ToList();
+            ddlCategoriaDepartamento.DataTextField = "Nombre";
             ddlCategoriaDepartamento.DataValueField = "idCategoria";
             ddlCategoriaDepartamento.DataBind();
 
-            ddlCategoriaSubcategoria.DataSource = context.Categorias.ToList();
-            ddlCategoriaSubcategoria.DataTextField = "Nombre_categoria";
+            ddlCategoriaSubcategoria.DataSource = context.Categoria.ToList();
+            ddlCategoriaSubcategoria.DataTextField = "Nombre";
             ddlCategoriaSubcategoria.DataValueField = "idCategoria";
             ddlCategoriaSubcategoria.DataBind();
 
-            ddlCatalogoProductos.DataSource = context.Productos.ToList();
-            ddlCatalogoProductos.DataTextField = "Nombre";
-            ddlCatalogoProductos.DataValueField = "idProductos";
-            ddlCatalogoProductos.DataBind();
+            ddlTipoUsuario.DataSource = context.TipoUsuario.ToList();
+            ddlTipoUsuario.DataTextField = "TipoUsuario1";
+            ddlTipoUsuario.DataValueField = "idTipousuario";
+            ddlTipoUsuario.DataBind();
         }
 
         protected void gv_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -85,10 +86,9 @@ namespace ProyectoCudec1
         {
             var departamento = new Departamento
             {
-                Nombre_departamento = txtDepartamentoNombre.Text,
-                id_categoria = int.Parse(ddlCategoriaDepartamento.SelectedValue)
+                Nombre = txtDepartamentoNombre.Text
             };
-            context.Departamentoes.Add(departamento);
+            context.Departamento.Add(departamento);
             context.SaveChanges();
             BindData();
         }
@@ -102,79 +102,30 @@ namespace ProyectoCudec1
         protected void gvDepartamento_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             var id = (int)gvDepartamento.DataKeys[e.RowIndex].Value;
-            var departamento = context.Departamentoes.Find(id);
-            departamento.Nombre_departamento = (gvDepartamento.Rows[e.RowIndex].FindControl("txtNombre") as TextBox).Text;
+            var departamento = context.Departamento.Find(id);
+            var txtNombre = (TextBox)gvDepartamento.Rows[e.RowIndex].FindControl("txtNombre");
+            departamento.Nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : departamento.Nombre;
             context.SaveChanges();
             gvDepartamento.EditIndex = -1;
             BindData();
+            hidActiveTab.Value = "#departamento";
         }
 
         protected void gvDepartamento_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvDepartamento.EditIndex = -1;
             BindData();
+            hidActiveTab.Value = "#departamento";
         }
 
         protected void gvDepartamento_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             var id = (int)gvDepartamento.DataKeys[e.RowIndex].Value;
-            var departamento = context.Departamentoes.Find(id);
-            context.Departamentoes.Remove(departamento);
+            var departamento = context.Departamento.Find(id);
+            context.Departamento.Remove(departamento);
             context.SaveChanges();
             BindData();
-        }
-
-        // Catálogo
-        protected void btnAgregarCatalogo_Click(object sender, EventArgs e)
-        {
-            byte[] imagenes = null;
-            if (fuCatalogoImagenes.HasFile)
-            {
-                using (var binaryReader = new System.IO.BinaryReader(fuCatalogoImagenes.PostedFile.InputStream))
-                {
-                    imagenes = binaryReader.ReadBytes(fuCatalogoImagenes.PostedFile.ContentLength);
-                }
-            }
-            var catalogo = new Catologo
-            {
-                descripcion = txtCatalogoDescripcion.Text,
-                imagenes = imagenes,
-                Productos_idProductos = int.Parse(ddlCatalogoProductos.SelectedValue)
-            };
-            context.Catologoes.Add(catalogo);
-            context.SaveChanges();
-            BindData();
-        }
-
-        protected void gvCatalogo_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            gvCatalogo.EditIndex = e.NewEditIndex;
-            BindData();
-        }
-
-        protected void gvCatalogo_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-            var id = (int)gvCatalogo.DataKeys[e.RowIndex].Value;
-            var catalogo = context.Catologoes.Find(id);
-            catalogo.descripcion = (gvCatalogo.Rows[e.RowIndex].FindControl("txtDescripcion") as TextBox).Text;
-            context.SaveChanges();
-            gvCatalogo.EditIndex = -1;
-            BindData();
-        }
-
-        protected void gvCatalogo_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            gvCatalogo.EditIndex = -1;
-            BindData();
-        }
-
-        protected void gvCatalogo_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            var id = (int)gvCatalogo.DataKeys[e.RowIndex].Value;
-            var catalogo = context.Catologoes.Find(id);
-            context.Catologoes.Remove(catalogo);
-            context.SaveChanges();
-            BindData();
+            hidActiveTab.Value = "#departamento";
         }
 
         // Proveedor
@@ -186,7 +137,7 @@ namespace ProyectoCudec1
                 Telefono = txtProveedorTelefono.Text,
                 Direccion = txtProveedorDireccion.Text
             };
-            context.Proveedors.Add(proveedor);
+            context.Proveedor.Add(proveedor);
             context.SaveChanges();
             BindData();
         }
@@ -200,28 +151,34 @@ namespace ProyectoCudec1
         protected void gvProveedor_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             var id = (int)gvProveedor.DataKeys[e.RowIndex].Value;
-            var proveedor = context.Proveedors.Find(id);
-            proveedor.Nombre = (gvProveedor.Rows[e.RowIndex].FindControl("txtNombre") as TextBox).Text;
-            proveedor.Telefono = (gvProveedor.Rows[e.RowIndex].FindControl("txtTelefono") as TextBox).Text;
-            proveedor.Direccion = (gvProveedor.Rows[e.RowIndex].FindControl("txtDireccion") as TextBox).Text;
+            var proveedor = context.Proveedor.Find(id);
+            var txtNombre = (TextBox)gvProveedor.Rows[e.RowIndex].FindControl("txtNombre");
+            var txtTelefono = (TextBox)gvProveedor.Rows[e.RowIndex].FindControl("txtTelefono");
+            var txtDireccion = (TextBox)gvProveedor.Rows[e.RowIndex].FindControl("txtDireccion");
+            proveedor.Nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : proveedor.Nombre;
+            proveedor.Telefono = !string.IsNullOrEmpty(txtTelefono.Text) ? txtTelefono.Text : proveedor.Telefono;
+            proveedor.Direccion = !string.IsNullOrEmpty(txtDireccion.Text) ? txtDireccion.Text : proveedor.Direccion;
             context.SaveChanges();
             gvProveedor.EditIndex = -1;
             BindData();
+            hidActiveTab.Value = "#proveedor";
         }
 
         protected void gvProveedor_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvProveedor.EditIndex = -1;
             BindData();
+            hidActiveTab.Value = "#proveedor";
         }
 
         protected void gvProveedor_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             var id = (int)gvProveedor.DataKeys[e.RowIndex].Value;
-            var proveedor = context.Proveedors.Find(id);
-            context.Proveedors.Remove(proveedor);
+            var proveedor = context.Proveedor.Find(id);
+            context.Proveedor.Remove(proveedor);
             context.SaveChanges();
             BindData();
+            hidActiveTab.Value = "#proveedor";
         }
 
         // Categoría
@@ -229,10 +186,10 @@ namespace ProyectoCudec1
         {
             var categoria = new Categoria
             {
-                Nombre_categoria = txtCategoriaNombre.Text,
+                Nombre = txtCategoriaNombre.Text,
                 Descripcion = txtCategoriaDescripcion.Text
             };
-            context.Categorias.Add(categoria);
+            context.Categoria.Add(categoria);
             context.SaveChanges();
             BindData();
         }
@@ -246,27 +203,32 @@ namespace ProyectoCudec1
         protected void gvCategoria_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             var id = (int)gvCategoria.DataKeys[e.RowIndex].Value;
-            var categoria = context.Categorias.Find(id);
-            categoria.Nombre_categoria = (gvCategoria.Rows[e.RowIndex].FindControl("txtNombre") as TextBox).Text;
-            categoria.Descripcion = (gvCategoria.Rows[e.RowIndex].FindControl("txtDescripcion") as TextBox).Text;
+            var categoria = context.Categoria.Find(id);
+            var txtNombre = (TextBox)gvCategoria.Rows[e.RowIndex].FindControl("txtNombre");
+            var txtDescripcion = (TextBox)gvCategoria.Rows[e.RowIndex].FindControl("txtDescripcion");
+            categoria.Nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : categoria.Nombre;
+            categoria.Descripcion = !string.IsNullOrEmpty(txtDescripcion.Text) ? txtDescripcion.Text : categoria.Descripcion;
             context.SaveChanges();
             gvCategoria.EditIndex = -1;
             BindData();
+            hidActiveTab.Value = "#categoria";
         }
 
         protected void gvCategoria_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvCategoria.EditIndex = -1;
             BindData();
+            hidActiveTab.Value = "#categoria";
         }
 
         protected void gvCategoria_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             var id = (int)gvCategoria.DataKeys[e.RowIndex].Value;
-            var categoria = context.Categorias.Find(id);
-            context.Categorias.Remove(categoria);
+            var categoria = context.Categoria.Find(id);
+            context.Categoria.Remove(categoria);
             context.SaveChanges();
             BindData();
+            hidActiveTab.Value = "#categoria";
         }
 
         // Subcategoría
@@ -274,10 +236,10 @@ namespace ProyectoCudec1
         {
             var subcategoria = new Subcategoria
             {
-                Nombre_de_subcategoria = txtSubcategoriaNombre.Text,
-                idSubcategoria = int.Parse(ddlCategoriaSubcategoria.SelectedValue)
+                Nombre = txtSubcategoriaNombre.Text,
+                idCategoria = int.Parse(ddlCategoriaSubcategoria.SelectedValue)
             };
-            context.Subcategorias.Add(subcategoria);
+            context.Subcategoria.Add(subcategoria);
             context.SaveChanges();
             BindData();
         }
@@ -291,27 +253,130 @@ namespace ProyectoCudec1
         protected void gvSubcategoria_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             var id = (int)gvSubcategoria.DataKeys[e.RowIndex].Value;
-            var subcategoria = context.Subcategorias.Find(id);
-            subcategoria.Nombre_de_subcategoria = (gvSubcategoria.Rows[e.RowIndex].FindControl("txtNombre") as TextBox).Text;
+            var subcategoria = context.Subcategoria.Find(id);
+            var txtNombre = (TextBox)gvSubcategoria.Rows[e.RowIndex].FindControl("txtNombre");
+            subcategoria.Nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : subcategoria.Nombre;
             context.SaveChanges();
             gvSubcategoria.EditIndex = -1;
             BindData();
+            hidActiveTab.Value = "#subcategoria";
         }
 
         protected void gvSubcategoria_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvSubcategoria.EditIndex = -1;
             BindData();
+            hidActiveTab.Value = "#subcategoria";
         }
 
         protected void gvSubcategoria_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             var id = (int)gvSubcategoria.DataKeys[e.RowIndex].Value;
-            var subcategoria = context.Subcategorias.Find(id);
-            context.Subcategorias.Remove(subcategoria);
+            var subcategoria = context.Subcategoria.Find(id);
+            context.Subcategoria.Remove(subcategoria);
+            context.SaveChanges();
+            BindData();
+            hidActiveTab.Value = "#subcategoria";
+        }
+
+        // Usuario
+        protected void btnAgregarUsuario_Click(object sender, EventArgs e)
+        {
+            byte[] foto = null;
+            if (fuUsuarioFotoDePerfil.HasFile)
+            {
+                using (BinaryReader br = new BinaryReader(fuUsuarioFotoDePerfil.PostedFile.InputStream))
+                {
+                    foto = br.ReadBytes(fuUsuarioFotoDePerfil.PostedFile.ContentLength);
+                }
+            }
+
+            var usuario = new usuario
+            {
+                Nombre = txtUsuarioNombre.Text,
+                ApellidoPaterno = txtUsuarioApellidoPaterno.Text,
+                ApellidoMaterno = txtUsuarioApellidoMaterno.Text,
+                FechaDeNacimiento = DateTime.Parse(txtUsuarioFechaDeNacimiento.Text),
+                Sexo = ddlUsuarioSexo.SelectedValue,
+                UserName = txtUsuarioUserName.Text,
+                Correo = txtUsuarioCorreo.Text,
+                Contraseña = txtUsuarioContraseña.Text,
+                Telefono = txtUsuarioTelefono.Text,
+                Celular = txtUsuarioCelular.Text,
+                FotoDePerfil = foto,
+                TipoUsuario_idTipousuario = int.Parse(ddlTipoUsuario.SelectedValue)
+            };
+            context.usuario.Add(usuario);
             context.SaveChanges();
             BindData();
         }
+
+        protected void gvUsuario_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvUsuario.EditIndex = e.NewEditIndex;
+            LoadDropdowns();
+            BindData();
+        }
+
+        protected void gvUsuario_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            var id = (int)gvUsuario.DataKeys[e.RowIndex].Value;
+            var usuario = context.usuario.Find(id);
+
+            var txtNombre = (TextBox)gvUsuario.Rows[e.RowIndex].FindControl("txtNombre");
+            var txtApellidoPaterno = (TextBox)gvUsuario.Rows[e.RowIndex].FindControl("txtApellidoPaterno");
+            var txtApellidoMaterno = (TextBox)gvUsuario.Rows[e.RowIndex].FindControl("txtApellidoMaterno");
+            var txtFechaDeNacimiento = (TextBox)gvUsuario.Rows[e.RowIndex].FindControl("txtFechaDeNacimiento");
+            var ddlSexo = (DropDownList)gvUsuario.Rows[e.RowIndex].FindControl("ddlSexo");
+            var txtUserName = (TextBox)gvUsuario.Rows[e.RowIndex].FindControl("txtUserName");
+            var txtCorreo = (TextBox)gvUsuario.Rows[e.RowIndex].FindControl("txtCorreo");
+            var txtContraseña = (TextBox)gvUsuario.Rows[e.RowIndex].FindControl("txtContraseña");
+            var txtTelefono = (TextBox)gvUsuario.Rows[e.RowIndex].FindControl("txtTelefono");
+            var txtCelular = (TextBox)gvUsuario.Rows[e.RowIndex].FindControl("txtCelular");
+            var fuFotoDePerfil = (FileUpload)gvUsuario.Rows[e.RowIndex].FindControl("fuFotoDePerfil");
+            int ddlTipoUsuario = 3;/*(DropDownList)gvUsuario.Rows[e.RowIndex].FindControl("ddlTipoUsuario");*/
+
+            usuario.Nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : usuario.Nombre;
+            usuario.ApellidoPaterno = !string.IsNullOrEmpty(txtApellidoPaterno.Text) ? txtApellidoPaterno.Text : usuario.ApellidoPaterno;
+            usuario.ApellidoMaterno = !string.IsNullOrEmpty(txtApellidoMaterno.Text) ? txtApellidoMaterno.Text : usuario.ApellidoMaterno;
+            usuario.FechaDeNacimiento = !string.IsNullOrEmpty(txtFechaDeNacimiento.Text) ? DateTime.Parse(txtFechaDeNacimiento.Text) : usuario.FechaDeNacimiento;
+            usuario.Sexo = ddlSexo.SelectedValue;
+            usuario.UserName = !string.IsNullOrEmpty(txtUserName.Text) ? txtUserName.Text : usuario.UserName;
+            usuario.Correo = !string.IsNullOrEmpty(txtCorreo.Text) ? txtCorreo.Text : usuario.Correo;
+            usuario.Contraseña = !string.IsNullOrEmpty(txtContraseña.Text) ? txtContraseña.Text : usuario.Contraseña;
+            usuario.Telefono = !string.IsNullOrEmpty(txtTelefono.Text) ? txtTelefono.Text : usuario.Telefono;
+            usuario.Celular = !string.IsNullOrEmpty(txtCelular.Text) ? txtCelular.Text : usuario.Celular;
+
+            if (fuFotoDePerfil.HasFile)
+            {
+                using (BinaryReader br = new BinaryReader(fuFotoDePerfil.PostedFile.InputStream))
+                {
+                    usuario.FotoDePerfil = br.ReadBytes(fuFotoDePerfil.PostedFile.ContentLength);
+                }
+            }
+
+            usuario.TipoUsuario_idTipousuario = ddlTipoUsuario;
+            context.SaveChanges();
+            gvUsuario.EditIndex = -1;
+            BindData();
+            hidActiveTab.Value = "#usuario";
+        }
+
+        protected void gvUsuario_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvUsuario.EditIndex = -1;
+            BindData();
+            hidActiveTab.Value = "#usuario";
+        }
+
+        protected void gvUsuario_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            var id = (int)gvUsuario.DataKeys[e.RowIndex].Value;
+            var usuario = context.usuario.Find(id);
+            context.usuario.Remove(usuario);
+            context.SaveChanges();
+            BindData();
+            hidActiveTab.Value = "#usuario";
+        }
     }
 }
-

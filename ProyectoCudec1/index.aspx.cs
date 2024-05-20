@@ -16,11 +16,17 @@ namespace ProyectoCudec1
                 ConfigureButtonsBasedOnUserRole();
                 LoadPagedData();
             }
+            else
+            {
+                btnCarritoCompras_Click(sender, e);
+            }
+         
         }
 
         private void ConfigureButtonsBasedOnUserRole()
         {
             int rolUsuario = WebForm3.RolUsuario;
+            
             switch (rolUsuario)
             {
                 case 1:
@@ -48,12 +54,28 @@ namespace ProyectoCudec1
             }
 
             int pageSize = 10;
-            var productos = _context.Productos.ToPagedList(pageNumber, pageSize);
+            var productos = _context.Productos
+                                    .OrderBy(p => p.Nombre) // Asegúrate de ordenar los datos
+                                    .ToPagedList(pageNumber, pageSize);
+
             ProductosRepeater.DataSource = productos;
             ProductosRepeater.DataBind();
 
             PagedListPager.DataSource = productos;
             PagedListPager.DataBind();
+        }
+
+        protected void btnCarritoCompras_Click(object sender, EventArgs e)
+        {
+            int userId = WebForm3._TipoRolUsuario;
+            if (userId == 1 || userId == 2 || userId == 3)
+            {
+                Response.Redirect("~/frmCompra.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
         }
     }
 }

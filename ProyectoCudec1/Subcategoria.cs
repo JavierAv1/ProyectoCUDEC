@@ -14,17 +14,11 @@ namespace ProyectoCudec1
     
     public partial class Subcategoria
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Subcategoria()
-        {
-            this.Categorias = new HashSet<Categoria>();
-        }
-    
         public int idSubcategoria { get; set; }
-        public string Nombre_de_subcategoria { get; set; }
-        public string descripcion { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public int idCategoria { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Categoria> Categorias { get; set; }
+        public virtual Categoria Categoria { get; set; }
     }
 }

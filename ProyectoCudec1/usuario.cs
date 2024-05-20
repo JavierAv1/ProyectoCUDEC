@@ -14,22 +14,28 @@ namespace ProyectoCudec1
     
     public partial class usuario
     {
-        public int id_usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public usuario()
+        {
+            this.Compra = new HashSet<Compra>();
+        }
+    
+        public int usuario_id { get; set; }
         public string Nombre { get; set; }
-        public string Apellido_paterno { get; set; }
-        public string Apellido_materno { get; set; }
-        public Nullable<System.DateTime> Fecha_de_nacimiento { get; set; }
+        public string ApellidoPaterno { get; set; }
+        public string ApellidoMaterno { get; set; }
+        public Nullable<System.DateTime> FechaDeNacimiento { get; set; }
         public string Sexo { get; set; }
-        public string User_Name { get; set; }
+        public string UserName { get; set; }
         public string Correo { get; set; }
         public string Contraseña { get; set; }
         public string Telefono { get; set; }
         public string Celular { get; set; }
-        public byte[] Foto_de_perfil { get; set; }
-        public int Compra_idCompra { get; set; }
-        public int Tipo_de_usuario_idTipo_de_usuario { get; set; }
+        public int TipoUsuario_idTipousuario { get; set; }
+        public byte[] FotoDePerfil { get; set; }
     
-        public virtual Compra Compra { get; set; }
-        public virtual Tipo_de_usuario Tipo_de_usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Compra> Compra { get; set; }
+        public virtual TipoUsuario TipoUsuario { get; set; }
     }
 }

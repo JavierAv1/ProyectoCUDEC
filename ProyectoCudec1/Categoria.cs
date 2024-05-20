@@ -17,16 +17,16 @@ namespace ProyectoCudec1
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Categoria()
         {
-            this.Departamentoes = new HashSet<Departamento>();
+            this.Subcategoria = new HashSet<Subcategoria>();
         }
     
         public int idCategoria { get; set; }
-        public string Nombre_categoria { get; set; }
+        public string Nombre { get; set; }
         public string Descripcion { get; set; }
-        public int Subcategoria_idSubcategoria { get; set; }
+        public int idDepartamento { get; set; }
     
-        public virtual Subcategoria Subcategoria { get; set; }
+        public virtual Departamento Departamento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Departamento> Departamentoes { get; set; }
+        public virtual ICollection<Subcategoria> Subcategoria { get; set; }
     }
 }

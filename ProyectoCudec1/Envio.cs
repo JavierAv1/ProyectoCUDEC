@@ -14,21 +14,16 @@ namespace ProyectoCudec1
     
     public partial class Envio
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Envio()
-        {
-            this.Compras = new HashSet<Compra>();
-        }
-    
         public int idEnvio { get; set; }
-        public Nullable<int> CodigoPostal { get; set; }
+        public string CodigoPostal { get; set; }
         public string Estado { get; set; }
         public string Calle { get; set; }
         public string Colonia { get; set; }
         public string Municipio { get; set; }
         public Nullable<int> Numero { get; set; }
+        public Nullable<int> idCompra { get; set; }
+        public Nullable<int> Status { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Compra> Compras { get; set; }
+        public virtual Compra Compra { get; set; }
     }
 }

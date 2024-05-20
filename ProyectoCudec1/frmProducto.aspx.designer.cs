@@ -33,15 +33,6 @@ namespace ProyectoCudec1
         protected global::System.Web.UI.WebControls.Button btnHome;
 
         /// <summary>
-        /// Control gvProducts.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvProducts;
-
-        /// <summary>
         /// Control txtName.
         /// </summary>
         /// <remarks>
@@ -87,6 +78,24 @@ namespace ProyectoCudec1
         protected global::System.Web.UI.WebControls.FileUpload fileImage;
 
         /// <summary>
+        /// Control IdDepartamento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList IdDepartamento;
+
+        /// <summary>
+        /// Control IdProveedor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList IdProveedor;
+
+        /// <summary>
         /// Control btnInsert.
         /// </summary>
         /// <remarks>
@@ -94,5 +103,14 @@ namespace ProyectoCudec1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnInsert;
+
+        /// <summary>
+        /// Control gvProducts.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvProducts;
     }
 }

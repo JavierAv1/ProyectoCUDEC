@@ -25,15 +25,14 @@ namespace ProyectoCudec1
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Categoria> Categorias { get; set; }
-        public virtual DbSet<Catologo> Catologoes { get; set; }
-        public virtual DbSet<Compra> Compras { get; set; }
-        public virtual DbSet<Departamento> Departamentoes { get; set; }
-        public virtual DbSet<Envio> Envios { get; set; }
-        public virtual DbSet<Producto> Productos { get; set; }
-        public virtual DbSet<Proveedor> Proveedors { get; set; }
-        public virtual DbSet<Subcategoria> Subcategorias { get; set; }
-        public virtual DbSet<Tipo_de_usuario> Tipo_de_usuario { get; set; }
-        public virtual DbSet<usuario> usuarios { get; set; }
+        public virtual DbSet<Categoria> Categoria { get; set; }
+        public virtual DbSet<Compra> Compra { get; set; }
+        public virtual DbSet<Departamento> Departamento { get; set; }
+        public virtual DbSet<Envio> Envio { get; set; }
+        public virtual DbSet<Productos> Productos { get; set; }
+        public virtual DbSet<Proveedor> Proveedor { get; set; }
+        public virtual DbSet<Subcategoria> Subcategoria { get; set; }
+        public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
+        public virtual DbSet<usuario> usuario { get; set; }
     }
 }

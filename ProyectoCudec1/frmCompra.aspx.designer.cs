@@ -11,7 +11,7 @@ namespace ProyectoCudec1
 {
 
 
-    public partial class WebForm4
+    public partial class frmCompra
     {
 
         /// <summary>
@@ -24,57 +24,57 @@ namespace ProyectoCudec1
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Control btnLogin.
+        /// Control btnHome.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogin;
+        protected global::System.Web.UI.WebControls.Button btnHome;
 
         /// <summary>
-        /// Control btnCarritoCompras.
+        /// Control gvCarrito.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCarritoCompras;
+        protected global::System.Web.UI.WebControls.GridView gvCarrito;
 
         /// <summary>
-        /// Control btnAdminProduct.
+        /// Control lblTotalProductos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdminProduct;
+        protected global::System.Web.UI.WebControls.Label lblTotalProductos;
 
         /// <summary>
-        /// Control btnAdminAccess.
+        /// Control lblTotalPedido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdminAccess;
+        protected global::System.Web.UI.WebControls.Label lblTotalPedido;
 
         /// <summary>
-        /// Control ProductosRepeater.
+        /// Control btnComprar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater ProductosRepeater;
+        protected global::System.Web.UI.WebControls.Button btnComprar;
 
         /// <summary>
-        /// Control PagedListPager.
+        /// Control btnRegresar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater PagedListPager;
+        protected global::System.Web.UI.WebControls.Button btnRegresar;
     }
 }

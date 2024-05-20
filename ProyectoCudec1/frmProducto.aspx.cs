@@ -11,6 +11,7 @@ namespace ProyectoCudec1
             if (!IsPostBack)
             {
                 BindGridView();
+                BindDropDownLists();
             }
         }
 
@@ -20,6 +21,22 @@ namespace ProyectoCudec1
             {
                 gvProducts.DataSource = context.Productos.ToList();
                 gvProducts.DataBind();
+            }
+        }
+
+        private void BindDropDownLists()
+        {
+            using (INNOTECEntities context = new INNOTECEntities())
+            {
+                IdDepartamento.DataSource = context.Departamento.ToList();
+                IdDepartamento.DataTextField = "Nombre";
+                IdDepartamento.DataValueField = "idDepartamento";
+                IdDepartamento.DataBind();
+
+                IdProveedor.DataSource = context.Proveedor.ToList();
+                IdProveedor.DataTextField = "Nombre";
+                IdProveedor.DataValueField = "idProveedor";
+                IdProveedor.DataBind();
             }
         }
 
@@ -33,15 +50,15 @@ namespace ProyectoCudec1
 
             using (INNOTECEntities context = new INNOTECEntities())
             {
-                var product = new Producto
+                var product = new Productos
                 {
                     Nombre = txtName.Text,
-                    Descripcion_del_producto = txtDescription.Text,
+                    DescripcionDelProducto = txtDescription.Text,
                     Precio = Convert.ToInt32(txtPrice.Text),
                     Cantidad = Convert.ToInt32(txtQuantity.Text),
-                    Imagen_del_producto = imageBytes,
-                    Departamento_idDepartamento = 1,  
-                    Proveedor_idProveedor = 1     
+                    ImagenDelProducto = imageBytes,
+                    idDepartamento = Convert.ToInt32(IdDepartamento.SelectedValue),
+                    idProveedor = Convert.ToInt32(IdProveedor.SelectedValue)
                 };
 
                 context.Productos.Add(product);
@@ -49,6 +66,8 @@ namespace ProyectoCudec1
             }
             BindGridView();
         }
+
+
 
         protected void gvProducts_RowEditing(object sender, GridViewEditEventArgs e)
         {
@@ -65,7 +84,7 @@ namespace ProyectoCudec1
             {
                 var product = context.Productos.Find(productId);
                 product.Nombre = (row.Cells[1].Controls[0] as TextBox).Text;
-                product.Descripcion_del_producto = (row.Cells[2].Controls[0] as TextBox).Text;
+                product.DescripcionDelProducto = (row.Cells[2].Controls[0] as TextBox).Text;
                 product.Precio = Convert.ToInt32((row.Cells[3].Controls[0] as TextBox).Text);
                 product.Cantidad = Convert.ToInt32((row.Cells[4].Controls[0] as TextBox).Text);
 

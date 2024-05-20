@@ -17,7 +17,7 @@ namespace ProyectoCudec1
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Proveedor()
         {
-            this.Productos = new HashSet<Producto>();
+            this.Productos = new HashSet<Productos>();
         }
     
         public int idProveedor { get; set; }
@@ -26,6 +26,6 @@ namespace ProyectoCudec1
         public string Direccion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Producto> Productos { get; set; }
+        public virtual ICollection<Productos> Productos { get; set; }
     }
 }

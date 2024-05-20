@@ -17,19 +17,21 @@ namespace ProyectoCudec1
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Compra()
         {
-            this.Productos = new HashSet<Producto>();
-            this.usuarios = new HashSet<usuario>();
+            this.Envio = new HashSet<Envio>();
         }
     
         public int idCompra { get; set; }
-        public Nullable<System.DateTime> Fecha_de_Vencimiento { get; set; }
-        public Nullable<System.DateTime> Fecha_de_Compra { get; set; }
-        public int Envio_idEnvio { get; set; }
+        public Nullable<System.DateTime> FechaVencimiento { get; set; }
+        public Nullable<System.DateTime> FechaDeCompra { get; set; }
+        public Nullable<int> idusuario { get; set; }
+        public Nullable<int> idproducto { get; set; }
+        public Nullable<int> Cantidad { get; set; }
     
-        public virtual Envio Envio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Producto> Productos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<usuario> usuarios { get; set; }
+        public virtual ICollection<Envio> Envio { get; set; }
+        public virtual Productos Productos { get; set; }
+        public virtual usuario usuario { get; set; }
+        public virtual Compra Compra1 { get; set; }
+        public virtual Compra Compra2 { get; set; }
     }
 }

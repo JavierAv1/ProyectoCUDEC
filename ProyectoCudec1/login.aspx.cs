@@ -11,11 +11,18 @@ namespace ProyectoCudec1
     public partial class WebForm3 : System.Web.UI.Page
     {
         public static int _TipoRolUsuario = 0;
+        public static int _UserId = 0;
 
         public static int RolUsuario
         {
             get { return _TipoRolUsuario; }
             set { _TipoRolUsuario = value; }
+        }
+
+        public static int UserId
+        {
+            get { return _UserId; }
+            set { _UserId = value; }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -42,14 +49,15 @@ namespace ProyectoCudec1
                 using (var context = new INNOTECEntities())
                 {
                     // Intenta encontrar un usuario que coincida con el correo proporcionado
-                    var usuario = context.usuarios.FirstOrDefault(u => u.User_Name == vcorreo);
+                    var usuario = context.usuario.FirstOrDefault(u => u.UserName == vcorreo);
 
                     if (usuario != null)
                     {
                         // Si se encuentra un usuario con el correo proporcionado, verifica si la contraseña coincide
                         if (usuario.Contraseña == vcontraseña)
                         {
-                            RolUsuario = usuario.Tipo_de_usuario_idTipo_de_usuario;
+                            RolUsuario = usuario.TipoUsuario_idTipousuario;
+                            UserId = usuario.usuario_id;
 
                                 Response.Redirect("index.aspx");
 
