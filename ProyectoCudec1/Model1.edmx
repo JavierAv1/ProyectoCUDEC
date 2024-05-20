@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="INNOTECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="INNOTECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="idCategoria" />
@@ -102,7 +102,7 @@
           <Property Name="TipoUsuario_idTipousuario" Type="int" Nullable="false" />
           <Property Name="FotoDePerfil" Type="image" />
         </EntityType>
-        <Association Name="FK__Categoria__idDep__48CFD27E">
+        <Association Name="FK__Categoria__idDep__59063A47">
           <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
           <End Role="Categoria" Type="Self.Categoria" Multiplicity="*" />
           <ReferentialConstraint>
@@ -114,7 +114,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Envio__idCompra__5441852A">
+        <Association Name="FK__Envio__idCompra__5CD6CB2B">
           <End Role="Compra" Type="Self.Compra" Multiplicity="0..1" />
           <End Role="Envio" Type="Self.Envio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -126,7 +126,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Productos__idDep__412EB0B6">
+        <Association Name="FK__Productos__idDep__5DCAEF64">
           <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
           <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -138,7 +138,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Productos__idPro__403A8C7D">
+        <Association Name="FK__Productos__idPro__5EBF139D">
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
           <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -150,7 +150,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Subcatego__idCat__4BAC3F29">
+        <Association Name="FK__Subcatego__idCat__5FB337D6">
           <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
           <End Role="Subcategoria" Type="Self.Subcategoria" Multiplicity="*" />
           <ReferentialConstraint>
@@ -162,7 +162,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__usuario__TipoUsu__398D8EEE">
+        <Association Name="FK__usuario__TipoUsu__60A75C0F">
           <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
           <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -220,27 +220,27 @@
           <EntitySet Name="Subcategoria" EntityType="Self.Subcategoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Categoria__idDep__48CFD27E" Association="Self.FK__Categoria__idDep__48CFD27E">
+          <AssociationSet Name="FK__Categoria__idDep__59063A47" Association="Self.FK__Categoria__idDep__59063A47">
             <End Role="Departamento" EntitySet="Departamento" />
             <End Role="Categoria" EntitySet="Categoria" />
           </AssociationSet>
-          <AssociationSet Name="FK__Envio__idCompra__5441852A" Association="Self.FK__Envio__idCompra__5441852A">
+          <AssociationSet Name="FK__Envio__idCompra__5CD6CB2B" Association="Self.FK__Envio__idCompra__5CD6CB2B">
             <End Role="Compra" EntitySet="Compra" />
             <End Role="Envio" EntitySet="Envio" />
           </AssociationSet>
-          <AssociationSet Name="FK__Productos__idDep__412EB0B6" Association="Self.FK__Productos__idDep__412EB0B6">
+          <AssociationSet Name="FK__Productos__idDep__5DCAEF64" Association="Self.FK__Productos__idDep__5DCAEF64">
             <End Role="Departamento" EntitySet="Departamento" />
             <End Role="Productos" EntitySet="Productos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Productos__idPro__403A8C7D" Association="Self.FK__Productos__idPro__403A8C7D">
+          <AssociationSet Name="FK__Productos__idPro__5EBF139D" Association="Self.FK__Productos__idPro__5EBF139D">
             <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="Productos" EntitySet="Productos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Subcatego__idCat__4BAC3F29" Association="Self.FK__Subcatego__idCat__4BAC3F29">
+          <AssociationSet Name="FK__Subcatego__idCat__5FB337D6" Association="Self.FK__Subcatego__idCat__5FB337D6">
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="Subcategoria" EntitySet="Subcategoria" />
           </AssociationSet>
-          <AssociationSet Name="FK__usuario__TipoUsu__398D8EEE" Association="Self.FK__usuario__TipoUsu__398D8EEE">
+          <AssociationSet Name="FK__usuario__TipoUsu__60A75C0F" Association="Self.FK__usuario__TipoUsu__60A75C0F">
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
             <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
@@ -257,8 +257,7 @@
             <End Role="Compra1" EntitySet="Compra" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="INNOTECModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">

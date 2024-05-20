@@ -120,6 +120,9 @@
                         <asp:TextBox ID="txtCategoriaDescripcion" runat="server" CssClass="form-control" Placeholder="Descripción"></asp:TextBox>
                     </div>
                     <div class="mb-3">
+                        <asp:TextBox ID="txtCategoriaProvee" runat="server" CssClass="form-control" Placeholder="Descripción"></asp:TextBox>
+                        </div>
+                    <div class="mb-3">
                         <asp:Button ID="btnAgregarCategoria" runat="server" Text="Agregar" CssClass="btn btn-primary" OnClick="btnAgregarCategoria_Click" />
                     </div>
                     <asp:GridView ID="gvCategoria" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" DataKeyNames="idCategoria" OnRowEditing="gvCategoria_RowEditing" OnRowUpdating="gvCategoria_RowUpdating" OnRowCancelingEdit="gvCategoria_RowCancelingEdit" OnRowDeleting="gvCategoria_RowDeleting" OnRowDataBound="gv_RowDataBound">

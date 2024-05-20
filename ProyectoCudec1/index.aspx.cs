@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using X.PagedList;
 
 namespace ProyectoCudec1
@@ -77,5 +78,24 @@ namespace ProyectoCudec1
                 Response.Redirect("~/Login.aspx");
             }
         }
+        protected void ProductosRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "AddToCart")
+            {
+                // Obtener el ID del producto desde el CommandArgument
+                int productoID = Convert.ToInt32(e.CommandArgument);
+
+                // Aquí deberías añadir el producto al carrito
+                // Ejemplo: AddProductToCart(productoID);
+
+                // Mostrar un mensaje de confirmación (opcional)
+                Response.Write("<script>alert('Producto añadido al carrito!');</script>");
+            }
+        }
+        protected void AddProductToCart(int productoID)
+        {
+            // Implementa la lógica para añadir el producto al carrito
+        }
+
     }
 }

@@ -141,6 +141,15 @@ namespace ProyectoCudec1
         protected global::System.Web.UI.WebControls.TextBox txtCategoriaDescripcion;
 
         /// <summary>
+        /// Control txtCategoriaProvee.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCategoriaProvee;
+
+        /// <summary>
         /// Control btnAgregarCategoria.
         /// </summary>
         /// <remarks>
