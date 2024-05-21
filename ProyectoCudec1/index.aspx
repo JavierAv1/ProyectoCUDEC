@@ -135,8 +135,8 @@
         <!-- Paginación -->
         <div class="row">
             <div class="col-md-12 text-center">
-                <asp:Button ID="idSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-secondary btn-custom" OnClick="btnNext_Click" />
-                <asp:Button ID="idAnterior" runat="server" Text="Anterior" CssClass="btn btn-secondary btn-custom" OnClick="btnPrevious_Click" />
+                <asp:Button ID="idSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-secondary btn-custom" OnClick="idSiguiente_Click" />
+                <asp:Button ID="idAnterior" runat="server" Text="Anterior" CssClass="btn btn-secondary btn-custom" OnClick="idAnterior_Click" />
             </div>
         </div>
 

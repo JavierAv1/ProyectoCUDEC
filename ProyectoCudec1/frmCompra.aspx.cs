@@ -73,11 +73,21 @@ namespace ProyectoCudec1
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            int idProducto = Convert.ToInt32((sender as Button).CommandArgument);
+            int idCompra = Convert.ToInt32((sender as Button).CommandArgument);
 
-            var compra = _context.Compra.FirstOrDefault(c => c.idproducto == idProducto && c.idusuario == WebForm3.UserId);
+            var compra = _context.Compra.FirstOrDefault(c => c.idCompra == idCompra && c.idusuario == WebForm3.UserId);
             if (compra != null)
             {
+                // Verificar si hay envíos relacionados
+                var enviosRelacionados = _context.Envio.Where(envio => envio.idCompra == idCompra).ToList();
+
+                // Manejar los envíos relacionados
+                foreach (var envio in enviosRelacionados)
+                {
+                    _context.Envio.Remove(envio);
+                }
+
+                // Eliminar la compra
                 _context.Compra.Remove(compra);
                 _context.SaveChanges();
             }

@@ -19,8 +19,33 @@ namespace ProyectoCudec1
         {
             using (INNOTECEntities context = new INNOTECEntities())
             {
-                gvProducts.DataSource = context.Productos.ToList();
+                var productosConImagenes = context.Productos.Select(p => new
+                {
+                    p.idProductos,
+                    p.Nombre,
+                    p.Precio,
+                    p.DescripcionDelProducto,
+                    p.ImagenDelProducto,
+                    p.Cantidad// Suponiendo que esta es la columna que almacena la URL de la imagen
+                }).ToList();
+
+                gvProducts.DataSource = productosConImagenes;
                 gvProducts.DataBind();
+            }
+        }
+        protected string GetImageSrc(object imageData)
+        {
+            if (imageData != null)
+            {
+                byte[] bytes = (byte[])imageData;
+                string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                return "data:image/jpeg;base64," + base64String;
+            }
+            else
+            {
+                // Si no hay imagen, puedes devolver una URL de imagen predeterminada
+                // return "ruta/de/imagen/default.jpg";
+                return "";
             }
         }
 
