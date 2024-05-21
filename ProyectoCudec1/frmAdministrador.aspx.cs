@@ -188,7 +188,7 @@ namespace ProyectoCudec1
             {
                 Nombre = txtCategoriaNombre.Text,
                 Descripcion = txtCategoriaDescripcion.Text,
-                idDepartamento = Convert.ToInt32(txtCategoriaProvee.Text)
+                idDepartamento = Convert.ToInt32(txtCategoriaProvee1.Text)
             };
             context.Categoria.Add(categoria);
             context.SaveChanges();

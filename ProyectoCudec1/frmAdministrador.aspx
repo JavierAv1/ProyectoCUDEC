@@ -120,7 +120,7 @@
                         <asp:TextBox ID="txtCategoriaDescripcion" runat="server" CssClass="form-control" Placeholder="Descripción"></asp:TextBox>
                     </div>
                     <div class="mb-3">
-                        <asp:TextBox ID="txtCategoriaProvee" runat="server" CssClass="form-control" Placeholder="Descripción"></asp:TextBox>
+                        <asp:TextBox ID="txtCategoriaProvee1" runat="server" CssClass="form-control" Placeholder="Descripción"></asp:TextBox>
                         </div>
                     <div class="mb-3">
                         <asp:Button ID="btnAgregarCategoria" runat="server" Text="Agregar" CssClass="btn btn-primary" OnClick="btnAgregarCategoria_Click" />

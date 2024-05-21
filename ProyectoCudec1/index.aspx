@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="ProyectoCudec1.WebForm4" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="ProyectoCudec1.WebForm4" EnableEventValidation="false" %>
+
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -25,6 +26,19 @@
 
         .navbar-custom {
             margin-top: 80px; /* Aumentar margen superior para asegurar espacio adecuado */
+        }
+
+        .card-img-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 200px; /* Ajustar según el tamaño de las imágenes */
+            background-color: #f8f9fa;
+        }
+
+        .bi-image-placeholder {
+            font-size: 3rem;
+            color: #6c757d;
         }
     </style>
 </head>
@@ -74,8 +88,7 @@
                                 <a class="nav-link" href="#">Lubricantes y Químicos</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Filtros
-                                </a>
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Filtros</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Coche</a></li>
                                     <li>
@@ -85,8 +98,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Baterías
-                                </a>
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Baterías</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">24V</a></li>
                                     <li>
@@ -104,39 +116,29 @@
                 </div>
             </nav>
         </div>
-        <!-- Aquí va el contenido principal de la página -->
-        <div class="container">
-            <h2>Productos</h2>
-            <asp:Repeater ID="ProductosRepeater" runat="server">
-                <ItemTemplate>
-                    <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm">
-                            <img src='<%# "data:image/jpeg;base64," + Convert.ToBase64String((byte[])Eval("ImagenDelProducto")) %>' class="card-img-top" alt='<%# Eval("Nombre") %>'>
-                            <div class="card-body">
-                                <h5 class="card-title"><%# Eval("Nombre") %></h5>
-                                <p class="card-text"><%# Eval("DescripcionDelProducto") %></p>
-                                <!-- Botón para añadir al carrito -->
-                              <asp:Button ID="btnAddToCart" runat="server" OnClick="btnAddToCart_Click" Text="Añadir al Carrito" CommandName="AddToCart" CommandArgument='<%# Eval("idProductos") %>' CssClass="btn btn-primary"  />
-
-
-                            </div>
-                        </div>
+        <asp:Repeater ID="ProductosRepeater" runat="server" OnItemDataBound="ProductosRepeater_ItemDataBound" OnItemCommand="ProductosRepeater_ItemCommand">
+            <ItemTemplate>
+                <div class="card mb-4 shadow-sm">
+                    <asp:Literal ID="ImageLiteral" runat="server" />
+                    <div class="card-body">
+                        <h5 class="card-title"><%# Eval("Nombre") %></h5>
+                        <p class="card-text"><%# Eval("DescripcionDelProducto") %></p>
+                        <asp:LinkButton ID="btnAddToCart" runat="server" CommandName="AddToCart" CommandArgument='<%# Eval("idProductos") %>' Text="Añadir al Carrito" CssClass="btn btn-primary" />
                     </div>
-                </ItemTemplate>
-                <SeparatorTemplate>
-                    <div class="w-100"></div>
-                </SeparatorTemplate>
-            </asp:Repeater>
-
-            <!-- Paginación -->
-            <div class="row">
-                <div class="col-md-12 text-center">
-                     <asp:Button ID="Button1" runat="server" Text="Siguiente" CssClass="btn btn-secondary btn-custom" OnClick="btnNext_Click" />
-                    <asp:Button ID="Button2" runat="server" Text="Anterior" CssClass="btn btn-secondary btn-custom" OnClick="btnPrevious_Click" />
                 </div>
+            </ItemTemplate>
+        </asp:Repeater>
+
+
+
+
+        <!-- Paginación -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <asp:Button ID="idSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-secondary btn-custom" OnClick="btnNext_Click" />
+                <asp:Button ID="idAnterior" runat="server" Text="Anterior" CssClass="btn btn-secondary btn-custom" OnClick="btnPrevious_Click" />
             </div>
         </div>
-
 
         <br>
         <div class="container" style="padding-right: 10px; border-right: 1px solid #0b0b0b;">
@@ -185,7 +187,7 @@
             <span class="placeholder col-12 bg-secondary"></span>
         </div>
     </form>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4lQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>
 </html>

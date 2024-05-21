@@ -10,26 +10,22 @@ namespace ProyectoCudec1
     {
         private INNOTECEntities _context = new INNOTECEntities();
         private int PageSize = 2;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 ViewState["PageNumber"] = 1;
-
                 ConfigureButtonsBasedOnUserRole();
                 LoadPagedData();
             }
-            else
-            {
-                btnCarritoCompras_Click(sender, e);
-            }
-         
+
         }
 
         private void ConfigureButtonsBasedOnUserRole()
         {
             int rolUsuario = WebForm3.RolUsuario;
-            
+
             switch (rolUsuario)
             {
                 case 1:
@@ -58,9 +54,10 @@ namespace ProyectoCudec1
             ProductosRepeater.DataSource = productos;
             ProductosRepeater.DataBind();
 
-            Button2.Enabled = productos.HasPreviousPage;
-            Button1.Enabled = productos.HasNextPage;
+            idAnterior.Enabled = productos.HasPreviousPage;
+            idSiguiente.Enabled = productos.HasNextPage;
         }
+
         protected void btnPrevious_Click(object sender, EventArgs e)
         {
             int pageNumber = (int)ViewState["PageNumber"];
@@ -77,6 +74,7 @@ namespace ProyectoCudec1
             ViewState["PageNumber"] = pageNumber + 1;
             LoadPagedData();
         }
+
         protected void btnCarritoCompras_Click(object sender, EventArgs e)
         {
             int userId = WebForm3._TipoRolUsuario;
@@ -89,50 +87,74 @@ namespace ProyectoCudec1
                 Response.Redirect("~/Login.aspx");
             }
         }
-        protected void btnAddToCart_Click(object sender, EventArgs e)
+
+        protected void ProductosRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            // Obtener el ID del producto desde el argumento del comando
-            int productoID = Convert.ToInt32((sender as Button).CommandArgument);
-
-            // Llamar al método para agregar el producto al carrito
-            AddProductToCart(productoID);
+            if (e.CommandName == "AddToCart")
+            {
+                int productoID = Convert.ToInt32(e.CommandArgument);
+                AddProductToCart(productoID);
+            }
         }
-
 
         protected void AddProductToCart(int productoID)
         {
-            int UserId = WebForm3.UserId;
-            // Obtener el ID del usuario actualmente autenticado (aquí asumo que tienes un sistema de autenticación implementado)
-            int userID =  UserId; // Debes implementar esta función para obtener el ID del usuario actual
-
-            // Calcular la fecha actual
+            int userId = WebForm3.UserId;
             DateTime fechaDeCompra = DateTime.Now;
-
-            // Calcular la fecha de vencimiento (15 días después de la fecha de compra)
             DateTime fechaDeVencimiento = fechaDeCompra.AddDays(15);
-
-            // Insertar la información de la compra en la base de datos
-            using (var context = new INNOTECEntities())
+            if (userId == 0)
             {
-                Compra nuevaCompra = new Compra
+                Response.Redirect("~/Login.aspx");
+            }
+            else
+            {
+                using (var context = new INNOTECEntities())
                 {
-                    idusuario = userID,
-                    idproducto = productoID,
-                    Cantidad = 1,
-                    FechaDeCompra = fechaDeCompra,
-                    FechaVencimiento = fechaDeVencimiento
-                };
+                    Compra nuevaCompra = new Compra
+                    {
+                        idusuario = userId,
+                        idproducto = productoID,
+                        Cantidad = 1,
+                        FechaDeCompra = fechaDeCompra,
+                        FechaVencimiento = fechaDeVencimiento
+                    };
 
-                // Agregar la nueva compra a la tabla Compra
-                context.Compra.Add(nuevaCompra);
-
-                // Guardar los cambios en la base de datos
-                context.SaveChanges();
+                    context.Compra.Add(nuevaCompra);
+                    context.SaveChanges();
+                }
             }
 
-            // Mostrar un mensaje de confirmación
             Response.Write("<script>alert('Producto añadido al carrito y comprado exitosamente!');</script>");
         }
 
+        protected void ProductosRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Literal imageLiteral = e.Item.FindControl("ImageLiteral") as Literal;
+                Productos producto = (Productos)e.Item.DataItem;
+
+                // Asegúrate de que la propiedad "ImagenDelProducto" está correctamente nombrada y existe en tu modelo de datos.
+                byte[] imagenBytes = producto.ImagenDelProducto;
+
+                if (imagenBytes != null && imagenBytes.Length > 0)
+                {
+                    string imagenBase64 = Convert.ToBase64String(imagenBytes);
+                    imageLiteral.Text = $"<img src='data:image/jpeg;base64,{imagenBase64}' class='img-fluid' alt='Imagen del Producto'>";
+                }
+                else
+                {
+                    imageLiteral.Text = "<div class='card-img-placeholder'><i class='bi bi-image bi-image-placeholder'></i></div>";
+                }
+            }
+        }
+
+
+
+
+        private string ObtenerUrlDeImagen(int idProducto)
+        {
+            return $"~/Images/Productos/{idProducto}.jpg";
+        }
     }
 }
