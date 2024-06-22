@@ -142,6 +142,7 @@
                 </div>
             </nav>
         </div>
+<<<<<<< HEAD
       <div class="container">
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
@@ -153,6 +154,51 @@
                                 <h5 class="card-title"><%# Eval("Nombre") %></h5>
                                 <p class="card-text"><%# Eval("DescripcionDelProducto") %></p>
                                 <asp:LinkButton ID="btnAddToCart" runat="server" CommandName="AddToCart" CommandArgument='<%# Eval("idProductos") %>' Text="Añadir al Carrito" CssClass="btn btn-primary" />
+=======
+        <asp:Repeater ID="ProductosRepeater" runat="server" OnItemDataBound="ProductosRepeater_ItemDataBound" OnItemCommand="ProductosRepeater_ItemCommand">
+            <ItemTemplate>
+                <div class="card mb-4 shadow-sm">
+                    <asp:Literal ID="ImageLiteral" runat="server" />
+                    <div class="card-body">
+                        <h5 class="card-title"><%# Eval("Nombre") %></h5>
+                        <p class="card-text"><%# Eval("DescripcionDelProducto") %></p>
+                        <asp:LinkButton ID="btnAddToCart" runat="server" CommandName="AddToCart" CommandArgument='<%# Eval("idProductos") %>' Text="Añadir al Carrito" CssClass="btn btn-primary" />
+                    </div>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
+
+
+
+
+        <!-- Paginación -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <asp:Button ID="idSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-secondary btn-custom" OnClick="idSiguiente_Click" />
+                <asp:Button ID="idAnterior" runat="server" Text="Anterior" CssClass="btn btn-secondary btn-custom" OnClick="idAnterior_Click" />
+            </div>
+        </div>
+
+        <br>
+        <div class="container" style="padding-right: 10px; border-right: 1px solid #0b0b0b;">
+            <span class="placeholder col-12 bg-secondary"></span>
+        </div>
+        <div class="container" style="background-image: url('src/Background.jpeg'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+            <div class="container">
+                <div class="container text-center">
+                    <div class="row align-items-center">
+                        <div class="col m-4">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1117.91456900156!2d-99.1975342227435!3d19.53296452700432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d21d50f953a725%3A0x80f21e0bba22de68!2sUniversidad%20Multicultural%20CUDEC!5e0!3m2!1ses!2smx!4v1702406788608!5m2!1ses!2smx" width="400" height="455" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="col m-4">
+                            <div class="card" width="400" height="460">
+                                <img src="src/Refacciones.jpeg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nuestros Servicios</h5>
+                                    <p class="card-text">Somos una empresa dedicada a la venta de refacciones de autos pequeños y grandes.</p>
+                                    <a href="tel:5544880525" class="btn btn-primary">LLamar</a>
+                                </div>
+>>>>>>> 1934963796f0bcbf6c45a443143246d5384383bf
                             </div>
                         </div>
                     </ItemTemplate>

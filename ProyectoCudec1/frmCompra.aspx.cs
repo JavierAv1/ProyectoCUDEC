@@ -75,15 +75,19 @@ namespace ProyectoCudec1
         {
             int idProducto = Convert.ToInt32((sender as Button).CommandArgument);
 
+            // Buscar la compra asociada al idProducto
             var compra = _context.Compra.FirstOrDefault(c => c.idproducto == idProducto && c.idusuario == WebForm3.UserId);
+
             if (compra != null)
             {
+                // Eliminar la compra
                 _context.Compra.Remove(compra);
                 _context.SaveChanges();
-            }
 
-            CargarCarrito();
+                CargarCarrito();
+            }
         }
+
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {

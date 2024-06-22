@@ -57,25 +57,35 @@
                     <asp:Button ID="btnInsert" runat="server" Text="Insertar" CssClass="btn btn-primary" OnClick="btnInsert_Click" />
                 </div>
             </div>
-            <asp:GridView ID="gvProducts" runat="server" AutoGenerateColumns="False" DataKeyNames="idProductos" CssClass="table table-striped table-bordered mt-3" OnRowEditing="gvProducts_RowEditing" OnRowUpdating="gvProducts_RowUpdating" OnRowCancelingEdit="gvProducts_RowCancelingEdit" OnRowDeleting="gvProducts_RowDeleting">
-                <Columns>
-                    <asp:BoundField DataField="idProductos" HeaderText="ID" ReadOnly="True" />
-                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                    <asp:BoundField DataField="DescripcionDelProducto" HeaderText="Descripción" />
-                    <asp:BoundField DataField="Precio" HeaderText="Precio" />
-                    <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
-                    <asp:TemplateField>
-                        <ItemTemplate>
-                            <asp:Button ID="btnEdit" runat="server" CommandName="Edit" Text="Editar" CssClass="btn btn-edit btn-sm mr-2" />
-                            <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Eliminar" CssClass="btn btn-delete btn-sm" />
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <asp:Button ID="btnUpdate" runat="server" CommandName="Update" Text="Actualizar" CssClass="btn btn-primary btn-sm mr-2" />
-                            <asp:Button ID="btnCancel" runat="server" CommandName="Cancel" Text="Cancelar" CssClass="btn btn-secondary btn-sm" />
-                        </EditItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-            </asp:GridView>
+          <asp:GridView ID="gvProducts" runat="server" AutoGenerateColumns="False" DataKeyNames="idProductos" CssClass="table table-striped table-bordered mt-3" OnRowEditing="gvProducts_RowEditing" OnRowUpdating="gvProducts_RowUpdating" OnRowCancelingEdit="gvProducts_RowCancelingEdit" OnRowDeleting="gvProducts_RowDeleting">
+    <Columns>
+        <asp:BoundField DataField="idProductos" HeaderText="ID" ReadOnly="True" />
+        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+        <asp:BoundField DataField="DescripcionDelProducto" HeaderText="Descripción" />
+        <asp:BoundField DataField="Precio" HeaderText="Precio" />
+        <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
+        <asp:TemplateField HeaderText="Imagen">
+            <ItemTemplate>
+            <asp:Image ID="imgProducto" runat="server" ImageUrl='<%# GetImageSrc(Eval("ImagenDelProducto")) %>' Width="100" Height="100" />
+
+            </ItemTemplate>
+            <EditItemTemplate>
+                <!-- Aquí puedes agregar el control de imagen si necesitas editar la imagen -->
+            </EditItemTemplate>
+        </asp:TemplateField>
+        <asp:TemplateField>
+            <ItemTemplate>
+                <asp:Button ID="btnEdit" runat="server" CommandName="Edit" Text="Editar" CssClass="btn btn-edit btn-sm mr-2" />
+                <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Eliminar" CssClass="btn btn-delete btn-sm" />
+            </ItemTemplate>
+            <EditItemTemplate>
+                <asp:Button ID="btnUpdate" runat="server" CommandName="Update" Text="Actualizar" CssClass="btn btn-primary btn-sm mr-2" />
+                <asp:Button ID="btnCancel" runat="server" CommandName="Cancel" Text="Cancelar" CssClass="btn btn-secondary btn-sm" />
+            </EditItemTemplate>
+        </asp:TemplateField>
+    </Columns>
+</asp:GridView>
+
         </div>
     </form>
 

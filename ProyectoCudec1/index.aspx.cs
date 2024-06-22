@@ -47,19 +47,28 @@ namespace ProyectoCudec1
 
         private void LoadPagedData()
         {
-            int pageNumber = (int)ViewState["PageNumber"];
-            var productos = _context.Productos
-                                    .OrderBy(p => p.Nombre)
-                                    .ToPagedList(pageNumber, PageSize);
+            try
+            {
+                int pageNumber = (int)ViewState["PageNumber"];
+                var productos = _context.Productos
+                                        .OrderBy(p => p.Nombre)
+                                        .ToPagedList(pageNumber, PageSize);
 
-            ProductosRepeater.DataSource = productos;
-            ProductosRepeater.DataBind();
+                ProductosRepeater.DataSource = productos;
+                ProductosRepeater.DataBind();
 
-            idAnterior.Enabled = productos.HasPreviousPage;
-            idSiguiente.Enabled = productos.HasNextPage;
+                idAnterior.Enabled = productos.HasPreviousPage;
+                idSiguiente.Enabled = productos.HasNextPage;
+            }
+            catch (Exception Ex)
+            {
+
+                Console.WriteLine(Ex);
+            }
+            
         }
 
-        protected void btnPrevious_Click(object sender, EventArgs e)
+        protected void idAnterior_Click(object sender, EventArgs e)
         {
             int pageNumber = (int)ViewState["PageNumber"];
             if (pageNumber > 1)
@@ -69,7 +78,7 @@ namespace ProyectoCudec1
             }
         }
 
-        protected void btnNext_Click(object sender, EventArgs e)
+        protected void idSiguiente_Click(object sender, EventArgs e)
         {
             int pageNumber = (int)ViewState["PageNumber"];
             ViewState["PageNumber"] = pageNumber + 1;
