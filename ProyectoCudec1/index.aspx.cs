@@ -57,33 +57,33 @@ namespace ProyectoCudec1
                 ProductosRepeater.DataSource = productos;
                 ProductosRepeater.DataBind();
 
-                idAnterior.Enabled = productos.HasPreviousPage;
-                idSiguiente.Enabled = productos.HasNextPage;
+                //idAnterior.Enabled = productos.HasPreviousPage;
+                //idSiguiente.Enabled = productos.HasNextPage;
             }
             catch (Exception Ex)
             {
 
                 Console.WriteLine(Ex);
             }
-            
+
         }
 
-        protected void idAnterior_Click(object sender, EventArgs e)
-        {
-            int pageNumber = (int)ViewState["PageNumber"];
-            if (pageNumber > 1)
-            {
-                ViewState["PageNumber"] = pageNumber - 1;
-                LoadPagedData();
-            }
-        }
+        //protected void idAnterior_Click(object sender, EventArgs e)
+        //{
+        //    int pageNumber = (int)ViewState["PageNumber"];
+        //    if (pageNumber > 1)
+        //    {
+        //        ViewState["PageNumber"] = pageNumber - 1;
+        //        LoadPagedData();
+        //    }
+        //}
 
-        protected void idSiguiente_Click(object sender, EventArgs e)
-        {
-            int pageNumber = (int)ViewState["PageNumber"];
-            ViewState["PageNumber"] = pageNumber + 1;
-            LoadPagedData();
-        }
+        //protected void idSiguiente_Click(object sender, EventArgs e)
+        //{
+        //    int pageNumber = (int)ViewState["PageNumber"];
+        //    ViewState["PageNumber"] = pageNumber + 1;
+        //    LoadPagedData();
+        //}
 
         protected void btnCarritoCompras_Click(object sender, EventArgs e)
         {
@@ -151,9 +151,6 @@ namespace ProyectoCudec1
 
                         producto.ImagenDelProducto = item.ImagenDelProducto;
 
-                        //context.Productos.Add(producto);
-                        //}
-
                         if (context.Productos != null)
                         {
                             if (producto.ImagenDelProducto != null)
@@ -180,18 +177,13 @@ namespace ProyectoCudec1
                     }
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                
+
             }
 
 
         }
-
-
-
-
-
         private string ObtenerUrlDeImagen(int idProducto)
         {
             return $"~/Images/Productos/{idProducto}.jpg";

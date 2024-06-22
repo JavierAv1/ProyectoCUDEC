@@ -41,30 +41,34 @@
         }
 
         .card {
-    width: 18rem;
-    margin: 10px;
-}
+            width: 35rem;
+            margin: 15px;
+        }
 
-.card img {
-    height: 180px;
-    object-fit: cover;
-}
+        .card img {
+            height: 180px;
+            object-fit: cover;
+        }
 
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
+        .carousel-item {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .carousel-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.card-img-placeholder {
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-}
-
+        .card-img-placeholder {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
     </style>
 </head>
 <body>
@@ -142,42 +146,42 @@
                 </div>
             </nav>
         </div>
-<<<<<<< HEAD
-      <div class="container">
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            <ContentTemplate>
+
+        <!-- Carrusel de productos -->
+        <div id="productosCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
                 <asp:Repeater ID="ProductosRepeater" runat="server" OnItemDataBound="ProductosRepeater_ItemDataBound" OnItemCommand="ProductosRepeater_ItemCommand">
                     <ItemTemplate>
-                        <div class="card mb-4 shadow-sm">
-                            <asp:Literal ID="ImageLiteral" runat="server" />
-                            <div class="card-body">
-                                <h5 class="card-title"><%# Eval("Nombre") %></h5>
-                                <p class="card-text"><%# Eval("DescripcionDelProducto") %></p>
-                                <asp:LinkButton ID="btnAddToCart" runat="server" CommandName="AddToCart" CommandArgument='<%# Eval("idProductos") %>' Text="Añadir al Carrito" CssClass="btn btn-primary" />
-=======
-        <asp:Repeater ID="ProductosRepeater" runat="server" OnItemDataBound="ProductosRepeater_ItemDataBound" OnItemCommand="ProductosRepeater_ItemCommand">
-            <ItemTemplate>
-                <div class="card mb-4 shadow-sm">
-                    <asp:Literal ID="ImageLiteral" runat="server" />
-                    <div class="card-body">
-                        <h5 class="card-title"><%# Eval("Nombre") %></h5>
-                        <p class="card-text"><%# Eval("DescripcionDelProducto") %></p>
-                        <asp:LinkButton ID="btnAddToCart" runat="server" CommandName="AddToCart" CommandArgument='<%# Eval("idProductos") %>' Text="Añadir al Carrito" CssClass="btn btn-primary" />
-                    </div>
-                </div>
-            </ItemTemplate>
-        </asp:Repeater>
-
-
-
+                        <div class="carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>">
+                            <div class="card mb-4 shadow-sm">
+                                <asp:Literal ID="ImageLiteral" runat="server" />
+                                <div class="card-body">
+                                    <h5 class="card-title"><%# Eval("Nombre") %></h5>
+                                    <p class="card-text"><%# Eval("DescripcionDelProducto") %></p>
+                                    <asp:LinkButton ID="btnAddToCart" runat="server" CommandName="AddToCart" CommandArgument='<%# Eval("idProductos") %>' Text="Añadir al Carrito" CssClass="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#productosCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productosCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
 
         <!-- Paginación -->
-        <div class="row">
+      <%--  <div class="row">
             <div class="col-md-12 text-center">
                 <asp:Button ID="idSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-secondary btn-custom" OnClick="idSiguiente_Click" />
                 <asp:Button ID="idAnterior" runat="server" Text="Anterior" CssClass="btn btn-secondary btn-custom" OnClick="idAnterior_Click" />
             </div>
-        </div>
+        </div>--%>
 
         <br>
         <div class="container" style="padding-right: 10px; border-right: 1px solid #0b0b0b;">
