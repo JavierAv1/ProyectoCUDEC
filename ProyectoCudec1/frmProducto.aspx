@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmProducto.aspx.cs" Inherits="ProyectoCudec1.frmProducto" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmProducto.aspx.cs" Inherits="ProyectoCudec1.frmProducto" EnableEventValidation="true"  %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">

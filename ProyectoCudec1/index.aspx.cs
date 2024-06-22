@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -129,25 +130,55 @@ namespace ProyectoCudec1
 
         protected void ProductosRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            try
             {
-                Literal imageLiteral = e.Item.FindControl("ImageLiteral") as Literal;
-                Productos producto = (Productos)e.Item.DataItem;
-
-                // Asegúrate de que la propiedad "ImagenDelProducto" está correctamente nombrada y existe en tu modelo de datos.
-                byte[] imagenBytes = producto.ImagenDelProducto;
-
-                if (imagenBytes != null && imagenBytes.Length > 0)
+                using (INNOTECEntities context = new INNOTECEntities())
                 {
-                    string imagenBase64 = Convert.ToBase64String(imagenBytes);
-                    imageLiteral.Text = $"<img src='data:image/jpeg;base64,{imagenBase64}' class='img-fluid' alt='Imagen del Producto'>";
-                }
-                else
-                {
-                    imageLiteral.Text = "<div class='card-img-placeholder'><i class='bi bi-image bi-image-placeholder'></i></div>";
+                    var query = from product in context.Productos.AsEnumerable() select product;
+                    Productos producto = new Productos();
+                    foreach (var item in query)
+                    {
+
+
+                        producto.ImagenDelProducto = item.ImagenDelProducto;
+
+                        //context.Productos.Add(producto);
+                        //}
+
+                        if (context.Productos != null)
+                        {
+                            if (producto.ImagenDelProducto != null)
+                            {
+                                Literal imageLiteral = e.Item.FindControl("ImageLiteral") as Literal;
+                                byte[] imagenBytes = producto.ImagenDelProducto;
+
+                                if (imagenBytes != null && imagenBytes.Length > 0)
+                                {
+                                    string imagenBase64 = Convert.ToBase64String(imagenBytes);
+                                    imageLiteral.Text = $"<img src='data:image/jpeg;base64,{imagenBase64}' class='img-fluid' alt='Imagen del Producto'>";
+                                }
+                                else
+                                {
+                                    imageLiteral.Text = "<div class='card-img-placeholder'><i class='bi bi-image bi-image-placeholder'></i></div>";
+                                }
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
                 }
             }
+            catch (Exception ex) 
+            {
+                
+            }
+
+
         }
+
 
 
 
